@@ -123,7 +123,6 @@ const personaPanel =
 // Retain the local backend fallback when someone opens index.html directly.
 const API_BASE_URL = "https://mausam-plus-backend.onrender.com";
 
-
 // =========================================================
 // MAUSAM+ SHARED STATE
 //
