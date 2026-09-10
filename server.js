@@ -215,7 +215,10 @@ async function fetchForecast(lat, lon) {
     `&timezone=auto` +
     `&forecast_days=7`;
 
-  return fetchJson(url);
+  return fetchJson(url).catch((error) => {
+    console.error("Open-Meteo forecast error:", error);
+    throw error;
+});
 }
 
 /* ------------------------------------------------------------
