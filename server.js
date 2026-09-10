@@ -181,46 +181,47 @@ async function reverseGeocode(lat, lon) {
 /* ------------------------------------------------------------
  * Weather forecast
  * ------------------------------------------------------------ */
-
 async function fetchForecast(lat, lon) {
-  const url =
-    `${OM_FORECAST}?latitude=${lat}&longitude=${lon}` +
-    `&current=` +
-    `temperature_2m,` +
-    `relative_humidity_2m,` +
-    `apparent_temperature,` +
-    `precipitation,` +
-    `weather_code,` +
-    `wind_speed_10m,` +
-    `surface_pressure,` +
-    `uv_index` +
-    `&hourly=` +
-    `temperature_2m,` +
-    `precipitation_probability,` +
-    `uv_index,` +
-    `wind_speed_10m,` +
-    `visibility,` +
-    `relative_humidity_2m,` +
-    `weather_code` +
-    `&daily=` +
-    `sunrise,` +
-    `sunset,` +
-    `temperature_2m_max,` +
-    `temperature_2m_min,` +
-    `precipitation_probability_max,` +
-    `precipitation_sum,` +
-    `uv_index_max,` +
-    `weather_code` +
-    `&wind_speed_unit=ms` +
-    `&timezone=auto` +
-    `&forecast_days=7`;
+    const url =
+        `${OM_FORECAST}?latitude=${lat}&longitude=${lon}` +
+        `&current=` +
+        `temperature_2m,` +
+        `relative_humidity_2m,` +
+        `apparent_temperature,` +
+        `pressure_msl,` +
+        `wind_speed_10m,` +
+        `weather_code` +
+        `&hourly=` +
+        `temperature_2m,` +
+        `precipitation_probability,` +
+        `uv_index,` +
+        `wind_speed_10m,` +
+        `visibility,` +
+        `relative_humidity_2m,` +
+        `weather_code` +
+        `&daily=` +
+        `temperature_2m_max,` +
+        `temperature_2m_min,` +
+        `precipitation_probability_max,` +
+        `precipitation_sum,` +
+        `sunrise,` +
+        `sunset,` +
+        `weather_code` +
+        `&wind_speed_unit=ms` +
+        `&timezone=auto` +
+        `&forecast_days=7`;
 
-  return fetchJson(url).catch((error) => {
-    console.error("Open-Meteo forecast error:", error);
-    throw error;
-});
+    console.log("Open-Meteo URL:", url);
+
+    return fetchJson(url).catch((error) => {
+        console.error(
+            "Open-Meteo forecast error:",
+            error.message
+        );
+
+        throw error;
+    });
 }
-
 /* ------------------------------------------------------------
  * Air quality
  * ------------------------------------------------------------ */
