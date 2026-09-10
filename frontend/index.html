@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MAUSAM+ | Command Center</title>
+
+    <!-- CSS file -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- =========================
+         BACKGROUND DECORATIONS
+    ========================== -->
+
+    <div class="background">
+
+        <!-- Subtle world map -->
+        <div class="world-map"></div>
+
+        <!-- Decorative weather icons -->
+        <div class="weather-icon storm-icon">
+            ☁
+            <span>ϟ</span>
+        </div>
+
+        <div class="weather-icon cloud-icon">
+            ☁
+        </div>
+
+        <div class="weather-icon wind-icon">
+            ≋
+        </div>
+
+        <div class="weather-icon night-icon">
+            ☁
+        </div>
+
+        <!-- Bottom clouds -->
+        <div class="cloud-cloud cloud-left"></div>
+        <div class="cloud-cloud cloud-right"></div>
+
+    </div>
+
+
+    <!-- =========================
+         NAVIGATION BAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <!-- Logo -->
+        <a href="#" class="brand">
+
+            <div class="brand-icon">
+                <span class="sun"></span>
+                <span class="brand-cloud">☁</span>
+            </div>
+
+            <span class="brand-name">
+                MAUSAM<span class="plus">+</span>
+            </span>
+
+        </a>
+
+
+        <!-- Navigation Links -->
+<nav class="nav-links">
+
+    <a href="#home" class="nav-link active">
+        Home
+    </a>
+
+    <a href="#current-weather" class="nav-link">
+        Current Weather
+    </a>
+
+    <a href="#forecast" class="nav-link">
+        Forecast
+    </a>
+
+    <a href="#alerts" class="nav-link">
+        Alerts
+    </a>
+
+
+    <a href="#for-you" class="nav-link">
+        For You
+    </a>
+
+    <a href="#about" class="nav-link">
+        About Us
+    </a>
+
+    <a href="#contact" class="nav-link">
+        Contact
+    </a>
+
+</nav>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN HERO SECTION
+    ========================== -->
+
+    <main>
+
+        <section id="home" class="hero">
+
+            <!-- Main Logo -->
+            <div class="main-logo">
+
+                <div class="logo-circle">
+
+                    <!-- Crescent -->
+                    <div class="crescent"></div>
+
+                    <!-- Sun -->
+                    <div class="large-sun">
+
+                        <span class="sun-ray ray-1"></span>
+                        <span class="sun-ray ray-2"></span>
+                        <span class="sun-ray ray-3"></span>
+                        <span class="sun-ray ray-4"></span>
+                        <span class="sun-ray ray-5"></span>
+                        <span class="sun-ray ray-6"></span>
+                        <span class="sun-ray ray-7"></span>
+                        <span class="sun-ray ray-8"></span>
+
+                    </div>
+
+                    <!-- Main Cloud -->
+                    <div class="main-cloud">
+
+                        <span class="cloud-part cloud-part-1"></span>
+                        <span class="cloud-part cloud-part-2"></span>
+                        <span class="cloud-part cloud-part-3"></span>
+
+                    </div>
+
+                    <!-- Rain -->
+                    <div class="rain">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Website Name -->
+            <h1 class="main-title">
+                MAUSAM<span>+</span>
+            </h1>
+
+
+            <!-- Subtitle -->
+            <h2 class="command-center">
+                COMMAND CENTER
+            </h2>
+
+
+            <!-- Decorative Divider -->
+            <div class="divider">
+
+                <span class="divider-line"></span>
+
+                <span class="divider-dot"></span>
+
+                <span class="divider-line"></span>
+
+            </div>
+
+
+            <!-- Tagline -->
+            <p class="tagline">
+                Accurate Weather. Better Decisions. Every Day.
+            </p>
+
+        </section>
+
+
+                <!-- =========================================================
+            CURRENT WEATHER SECTION
+        ========================================================= -->
+
+        <section id="current-weather" class="current-weather-section">
+
+            <div class="current-weather-container">
+
+                <!-- Section Heading -->
+                <div class="weather-heading">
+
+                    <span class="section-label">
+                        CURRENT WEATHER
+                    </span>
+
+                    <h2>
+                        Weather <span>Right Now</span>
+                    </h2>
+
+                    <p>
+                        Get real-time weather conditions based on your location.
+                    </p>
+
+                </div>
+
+
+                <!-- Location Search -->
+                    <div class="location-search" role="search" aria-label="Weather location search">
+
+                        <div class="location-input-wrapper">
+
+                            <span class="search-icon" aria-hidden="true">⌕</span>
+
+                            <input
+                                type="search"
+                                id="locationInput"
+                                placeholder="Search city or location..."
+                                autocomplete="off"
+                                autocapitalize="words"
+                                spellcheck="false"
+                                enterkeyhint="search"
+                                maxlength="100"
+                                aria-label="City or location"
+                                aria-describedby="weatherSearchStatus"
+                            >
+
+                        </div>
+
+                        <button
+                            type="button"
+                            id="searchWeatherBtn"
+                            class="weather-search-btn">
+                            Search
+                        </button>
+
+                        <button
+                            type="button"
+                            id="myLocationBtn"
+                            class="location-btn">
+                            📍 My Location
+                        </button>
+
+                        <p
+                            id="weatherSearchStatus"
+                            class="weather-search-status"
+                            role="status"
+                            aria-live="polite"
+                            hidden>
+                        </p>
+
+                    </div>
+
+
+                <!-- Main Weather Card -->
+                <div class="main-weather-card">
+
+                    <!-- Location -->
+                    <div class="weather-location">
+
+                        <span class="location-pin">📍</span>
+
+                        <div>
+                            <h3 id="weatherLocation">
+                                Detecting location...
+                            </h3>
+
+                            <p id="weatherUpdated">
+                                Getting your location
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Main Weather Information -->
+                    <div class="weather-main">
+
+                        <div class="weather-icon" id="weatherIcon">
+                            🌤️
+                        </div>
+
+                        <div class="temperature">
+
+                            <span id="temperatureValue">
+                                --°
+                            </span>
+
+                            <span class="temperature-unit">
+                                C
+                            </span>
+
+                        </div>
+
+                        <div class="weather-condition">
+
+                            <h3 id="weatherCondition">
+                                Loading...
+                            </h3>
+
+                            <p>
+                                Feels like
+                                <strong id="feelsLike">
+                                    --°C
+                                </strong>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Weather Details -->
+                    <div class="weather-details">
+
+
+                        <!-- Humidity -->
+                        <div class="weather-detail-card">
+
+                            <div class="detail-icon">
+                                💧
+                            </div>
+
+                            <div>
+                                <span>Humidity</span>
+
+                                <strong id="humidity">
+                                    --%
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Wind -->
+                        <div class="weather-detail-card">
+
+                            <div class="detail-icon">
+                                💨
+                            </div>
+
+                            <div>
+                                <span>Wind Speed</span>
+
+                                <strong id="windSpeed">
+                                    -- km/h
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Pressure -->
+                        <div class="weather-detail-card">
+
+                            <div class="detail-icon">
+                                🌡️
+                            </div>
+
+                            <div>
+                                <span>Pressure</span>
+
+                                <strong id="pressure">
+                                    -- hPa
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Visibility -->
+                        <div class="weather-detail-card">
+
+                            <div class="detail-icon">
+                                👁️
+                            </div>
+
+                            <div>
+                                <span>Visibility</span>
+
+                                <strong id="visibility">
+                                    -- km
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Sunrise / Sunset -->
+                    <div class="sun-times">
+
+                        <div class="sun-time">
+
+                            <span class="sun-icon">
+                                🌅
+                            </span>
+
+                            <div>
+                                <span>Sunrise</span>
+
+                                <strong id="sunrise">
+                                    --:--
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="sun-time">
+
+                            <span class="sun-icon">
+                                🌇
+                            </span>
+
+                            <div>
+                                <span>Sunset</span>
+
+                                <strong id="sunset">
+                                    --:--
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================================
+     FORECAST SECTION
+========================================================= -->
+
+<section id="forecast" class="forecast-section">
+
+    <div class="forecast-container">
+
+        <!-- Section Heading -->
+        <div class="forecast-heading">
+
+            <span class="section-label">
+                WEATHER FORECAST
+            </span>
+
+            <h2>
+                Weather for the <span>Days Ahead</span>
+            </h2>
+
+            <p>
+                Plan ahead with a detailed forecast for your location.
+            </p>
+
+        </div>
+
+
+        <!-- Forecast Location -->
+        <div class="forecast-location">
+
+            <div class="forecast-location-icon">
+                📍
+            </div>
+
+            <div>
+
+                <span>
+                    FORECAST FOR
+                </span>
+
+                <h3 id="forecastLocation">
+                    Your Current Location
+                </h3>
+
+            </div>
+
+        </div>
+
+
+                <!-- =====================================================
+                    7 DAY FORECAST
+            ====================================================== -->
+
+        <div class="forecast-card">
+
+            <div class="forecast-card-heading">
+
+                <div>
+                    <h3>7-Day Forecast</h3>
+
+                    <p>
+                        Daily weather outlook
+                    </p>
+                </div>
+
+                <span class="forecast-status">
+                    ● LIVE FORECAST
+                </span>
+
+            </div>
+
+            <!-- Forecast Days -->
+
+            <div class="forecast-grid" id="forecastDays">
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</section>
+
+
+        <!-- =========================================================
+     PERSONA INSIGHTS SECTION ("FOR YOU")
+========================================================= -->
+
+<section id="insights" class="insights-section" hidden>
+
+    <div class="insights-container">
+
+        <!-- Heading -->
+        <div class="weather-heading">
+
+            <span class="section-label">
+                PERSONALIZED FOR YOU
+            </span>
+
+            <h2>
+                Weather that fits <span>your day</span>.
+            </h2>
+
+            <p>
+                Pick what you're doing today and MAUSAM+ surfaces the
+                numbers that actually matter for it.
+            </p>
+
+        </div>
+
+
+        <!-- Persona tab strip -->
+        <div class="persona-tabs" id="personaTabs" role="tablist">
+
+            <button type="button" class="persona-tab active" data-persona="health">
+                <span class="persona-tab-icon">🌿</span>
+                Health &amp; Allergies
+            </button>
+
+            <button type="button" class="persona-tab" data-persona="fitness">
+                <span class="persona-tab-icon">🏃</span>
+                Outdoor Fitness
+            </button>
+
+            <button type="button" class="persona-tab" data-persona="beach">
+                <span class="persona-tab-icon">🏄</span>
+                Beach &amp; Surf
+            </button>
+
+            <button type="button" class="persona-tab" data-persona="travel">
+                <span class="persona-tab-icon">✈️</span>
+                Travelers
+            </button>
+
+            <button type="button" class="persona-tab" data-persona="family">
+                <span class="persona-tab-icon">👨‍👩‍👧</span>
+                Family &amp; School
+            </button>
+
+            <button type="button" class="persona-tab" data-persona="garden">
+                <span class="persona-tab-icon">🌱</span>
+                Agriculture &amp; Garden
+            </button>
+
+            <button type="button" class="persona-tab" data-persona="commute">
+                <span class="persona-tab-icon">🚗</span>
+                Commuters
+            </button>
+
+            <button type="button" class="persona-tab" data-persona="events">
+                <span class="persona-tab-icon">🎪</span>
+                Event Planners
+            </button>
+
+        </div>
+
+
+        <!-- Persona panel — filled in by script.js from the same
+             weather payload already loaded for Current Weather -->
+        <div class="persona-panel" id="personaPanel">
+
+            <p class="insights-loading" id="insightsLoading">
+                Load a location above to see your personalized insights.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+        <!-- =========================================================
+     WEATHER ALERTS SECTION
+========================================================= -->
+
+<section id="alerts" class="alerts-section">
+
+    <div class="alerts-container">
+
+        <!-- Section Heading -->
+        <div class="alerts-heading">
+
+            <span class="section-label">
+                WEATHER ALERTS
+            </span>
+
+            <h2>
+                Local conditions. <span>Clear guidance.</span>
+            </h2>
+
+            <p>
+                Live weather risks derived from the same location data
+                used for the current conditions and forecast.
+            </p>
+            <p class="alerts-source-note">
+                Forecast-derived guidance — not an official government warning.
+            </p>
+
+        </div>
+
+
+        <!-- Current Location -->
+        <div class="alerts-location">
+
+            <div class="alerts-location-icon">
+                📍
+            </div>
+
+            <div>
+
+                <span>
+                    ALERTS FOR
+                </span>
+
+                <h3 id="alertsLocation">
+                    Waiting for a location...
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             ACTIVE ALERT
+        ====================================================== -->
+
+        <div class="active-alert-card" id="activeAlertCard">
+
+            <div class="active-alert-top">
+
+                <div class="alert-icon-large" id="alertIcon" aria-hidden="true">
+                    ⚠️
+                </div>
+
+                <div class="active-alert-title">
+
+                    <span class="alert-status" id="alertStatus">
+                        ● CHECKING LOCAL CONDITIONS
+                    </span>
+
+                    <h3 id="activeAlertTitle">
+                        Checking local weather…
+                    </h3>
+
+                </div>
+
+                <div class="alert-severity">
+                    CHECKING
+                </div>
+
+            </div>
+
+
+            <div class="active-alert-content">
+
+                <p id="activeAlertDescription">
+                    Allow location access or search for a city to load live alerts.
+                </p>
+
+
+                <div class="alert-meta">
+
+                    <div class="alert-meta-item">
+
+                        <span>🕐</span>
+
+                        <div>
+                            <small>EXPECTED</small>
+                            <strong id="alertTime">
+                                —
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-meta-item">
+
+                        <span>📍</span>
+
+                        <div>
+                            <small>AREA</small>
+                            <strong id="alertArea">
+                                Your Current Location
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             ALERT CATEGORIES
+        ====================================================== -->
+
+
+                <div
+                    class="alert-categories"
+                    id="alertCategories"
+                    aria-live="polite"
+                    aria-busy="true">
+
+                    <p class="alert-categories-loading">
+                        Loading local weather guidance…
+                    </p>
+
+                </div>
+
+
+
+            <!-- =====================================================
+                SAFETY INFORMATION
+            ====================================================== -->
+
+            <div class="safety-information">
+
+                <div class="safety-heading">
+
+                    <div class="safety-icon">
+                        🛡️
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Safety Information
+                        </h3>
+
+                        <p>
+                            Follow these precautions during severe weather.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="safety-tips">
+
+                    <div class="safety-tip">
+
+                        <span>01</span>
+
+                        <p>
+                            Stay indoors during severe weather
+                            whenever possible.
+                        </p>
+
+                    </div>
+
+
+                    <div class="safety-tip">
+
+                        <span>02</span>
+
+                        <p>
+                            Avoid flooded roads and
+                            waterlogged areas.
+                        </p>
+
+                    </div>
+
+
+                    <div class="safety-tip">
+
+                        <span>03</span>
+
+                        <p>
+                            Keep checking MAUSAM+ for
+                            updated alerts.
+                        </p>
+
+                    </div>
+
+
+                    <div class="safety-tip">
+
+                        <span>04</span>
+
+                        <p>
+                            Follow instructions issued by
+                            local authorities.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Last Updated -->
+
+            <div class="alerts-updated" id="alertsUpdated" role="status">
+
+                <span>
+                    ●
+                </span>
+
+                Alerts updated automatically
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+<!-- =========================================================
+     FOR YOU SECTION
+========================================================= -->
+
+<section id="for-you" class="for-you-section">
+
+    <div class="section-container">
+
+        <!-- =================================================
+             SECTION HEADER
+        ================================================== -->
+
+        <div class="section-header">
+
+            <span class="section-kicker">
+                PERSONALIZED WEATHER
+            </span>
+
+            <h2>
+                For <span>You</span>
+            </h2>
+
+            <p>
+                Weather insights tailored to what matters most
+                to you.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             USER PROFILE TABS
+        ================================================== -->
+
+        <div
+            class="for-you-tabs"
+            id="forYouTabs"
+            role="tablist"
+            aria-label="Personalized weather profiles">
+
+
+            <!-- Health -->
+            <button
+                class="for-you-tab active"
+                type="button"
+                data-profile="health"
+                role="tab"
+                aria-selected="true">
+
+                <span class="for-you-tab-icon">
+                    🫁
+                </span>
+
+                <span class="for-you-tab-text">
+                    <strong>Health</strong>
+                    <small>AQI & UV</small>
+                </span>
+
+            </button>
+
+
+            <!-- Fitness -->
+            <button
+                class="for-you-tab"
+                type="button"
+                data-profile="fitness"
+                role="tab"
+                aria-selected="false">
+
+                <span class="for-you-tab-icon">
+                    🏃
+                </span>
+
+                <span class="for-you-tab-text">
+                    <strong>Fitness</strong>
+                    <small>Outdoor activity</small>
+                </span>
+
+            </button>
+
+
+            <!-- Beach -->
+            <button
+                class="for-you-tab"
+                type="button"
+                data-profile="beach"
+                role="tab"
+                aria-selected="false">
+
+                <span class="for-you-tab-icon">
+                    🏖️
+                </span>
+
+                <span class="for-you-tab-text">
+                    <strong>Beach</strong>
+                    <small>Sea conditions</small>
+                </span>
+
+            </button>
+
+
+            <!-- Travel -->
+            <button
+                class="for-you-tab"
+                type="button"
+                data-profile="travel"
+                role="tab"
+                aria-selected="false">
+
+                <span class="for-you-tab-icon">
+                    ✈️
+                </span>
+
+                <span class="for-you-tab-text">
+                    <strong>Travel</strong>
+                    <small>Travel weather</small>
+                </span>
+
+            </button>
+
+
+            <!-- Family -->
+            <button
+                class="for-you-tab"
+                type="button"
+                data-profile="family"
+                role="tab"
+                aria-selected="false">
+
+                <span class="for-you-tab-icon">
+                    👨‍👩‍👧
+                </span>
+
+                <span class="for-you-tab-text">
+                    <strong>Family</strong>
+                    <small>Daily planning</small>
+                </span>
+
+            </button>
+
+
+            <!-- Agriculture -->
+            <button
+                class="for-you-tab"
+                type="button"
+                data-profile="agriculture"
+                role="tab"
+                aria-selected="false">
+
+                <span class="for-you-tab-icon">
+                    🌱
+                </span>
+
+                <span class="for-you-tab-text">
+                    <strong>Garden</strong>
+                    <small>Soil & rainfall</small>
+                </span>
+
+            </button>
+
+
+            <!-- Commute -->
+            <button
+                class="for-you-tab"
+                type="button"
+                data-profile="commute"
+                role="tab"
+                aria-selected="false">
+
+                <span class="for-you-tab-icon">
+                    🚗
+                </span>
+
+                <span class="for-you-tab-text">
+                    <strong>Commute</strong>
+                    <small>Travel conditions</small>
+                </span>
+
+            </button>
+
+
+            <!-- Events -->
+            <button
+                class="for-you-tab"
+                type="button"
+                data-profile="events"
+                role="tab"
+                aria-selected="false">
+
+                <span class="for-you-tab-icon">
+                    🎪
+                </span>
+
+                <span class="for-you-tab-text">
+                    <strong>Events</strong>
+                    <small>Outdoor planning</small>
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             PERSONALIZED CONTENT PANEL
+        ================================================== -->
+
+        <div
+            class="for-you-panel"
+            id="forYouPanel">
+
+
+            <!-- Panel Header -->
+
+            <div class="for-you-panel-header">
+
+                <div>
+
+                    <span
+                        class="for-you-panel-kicker"
+                        id="forYouKicker">
+
+                        HEALTH & WELLBEING
+
+                    </span>
+
+                    <h3 id="forYouTitle">
+                        Weather for your wellbeing
+                    </h3>
+
+                    <p id="forYouDescription">
+                        Monitor environmental conditions that
+                        may affect your comfort and wellbeing.
+                    </p>
+
+                </div>
+
+
+                <div class="for-you-live">
+
+                    <span class="live-dot"></span>
+
+                    LIVE DATA
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 INFORMATION CARDS
+            ================================================== -->
+
+            <div
+                class="for-you-metrics"
+                id="forYouMetrics">
+
+
+                <!-- AQI -->
+
+                <div class="for-you-metric">
+
+                    <div class="for-you-metric-icon">
+                        🌫️
+                    </div>
+
+                    <div class="for-you-metric-content">
+
+                        <small>
+                            AIR QUALITY
+                        </small>
+
+                        <strong id="forYouMetric1">
+                            -- 
+                        </strong>
+
+                        <span id="forYouMetric1Label">
+                            Loading...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- UV -->
+
+                <div class="for-you-metric">
+
+                    <div class="for-you-metric-icon">
+                        ☀️
+                    </div>
+
+                    <div class="for-you-metric-content">
+
+                        <small>
+                            UV INDEX
+                        </small>
+
+                        <strong id="forYouMetric2">
+                            --
+                        </strong>
+
+                        <span id="forYouMetric2Label">
+                            Loading...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Humidity -->
+
+                <div class="for-you-metric">
+
+                    <div class="for-you-metric-icon">
+                        💧
+                    </div>
+
+                    <div class="for-you-metric-content">
+
+                        <small>
+                            HUMIDITY
+                        </small>
+
+                        <strong id="forYouMetric3">
+                            --
+                        </strong>
+
+                        <span id="forYouMetric3Label">
+                            Loading...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Pollen -->
+
+                <div class="for-you-metric">
+
+                    <div class="for-you-metric-icon">
+                        🌼
+                    </div>
+
+                    <div class="for-you-metric-content">
+
+                        <small>
+                            POLLEN
+                        </small>
+
+                        <strong id="forYouMetric4">
+                            --
+                        </strong>
+
+                        <span id="forYouMetric4Label">
+                            Loading...
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RECOMMENDATION
+            ================================================== -->
+
+            <div class="for-you-recommendation">
+
+                <div class="recommendation-icon">
+                    💡
+                </div>
+
+                <div>
+
+                    <span>
+                        MAUSAM+ RECOMMENDATION
+                    </span>
+
+                    <p id="forYouRecommendation">
+                        Checking current conditions...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+        <!-- =========================
+             ABOUT SECTION
+        ========================== -->
+
+        <!-- =========================
+     ABOUT US SECTION
+========================== -->
+
+<section id="about" class="about-section">
+
+    <div class="about-container">
+
+        <!-- About Us Heading -->
+        <div class="about-heading">
+
+            <span class="section-label">
+                ABOUT US
+            </span>
+
+            <h2>
+                Weather Information,
+                <span>Simplified.</span>
+            </h2>
+
+            <p>
+                MAUSAM+ is a modern weather reporting platform
+                designed to provide clear, reliable and
+                easy-to-understand weather information.
+            </p>
+
+        </div>
+
+
+        <!-- About MAUSAM+ -->
+        <div class="about-content">
+
+            <div class="about-text">
+
+                <h3>About MAUSAM+</h3>
+
+                <p>
+                    MAUSAM+ brings essential weather information
+                    together in one convenient platform. Users can
+                    access current weather conditions, forecasts,
+                    weather alerts and atmospheric information
+                    through a simple and intuitive interface.
+                </p>
+
+                <p>
+                    Our goal is to make weather information
+                    accessible, understandable and useful for
+                    everyday decision-making.
+                </p>
+
+            </div>
+
+
+            <!-- Features -->
+            <div class="about-features">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🌤️
+                    </div>
+
+                    <h4>Real-Time Data</h4>
+
+                    <p>
+                        Stay updated with current weather
+                        conditions.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📅
+                    </div>
+
+                    <h4>Forecasts</h4>
+
+                    <p>
+                        Plan ahead with upcoming weather
+                        forecasts.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        ⚠️
+                    </div>
+
+                    <h4>Weather Alerts</h4>
+
+                    <p>
+                        Stay informed about important
+                        weather conditions.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             OUR TEAM
+        ========================== -->
+
+            <div class="team-section">
+
+        <div class="team-heading">
+
+            <span class="section-label">
+                OUR TEAM
+            </span>
+
+            <h2>
+                Meet the <span>Team</span>
+            </h2>
+
+            <p>
+                The people behind MAUSAM+
+            </p>
+
+        </div>
+
+
+        <!-- Six Equal Team Cards -->
+
+        <div class="team-grid">
+
+
+            <!-- Member 1 - Team Member -->
+            <div class="team-card">
+
+                <div class="member-photo">
+                    <span>M1</span>
+                </div>
+
+                <div class="member-info">
+
+                    <h3>Moni Shankar Kanrar</h3>
+
+                    <span class="member-role">
+                        Team Member
+                    </span>
+
+                    <p>
+                        Documentation & Research
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Member 2 -->
+            <div class="team-card">
+
+                <div class="member-photo">
+                    <span>TL</span>
+                </div>
+
+                <div class="member-info">
+
+                    <h3>Ahangjeet Kundu</h3>
+
+                    <span class="member-role">
+                        Team Leader
+                    </span>
+
+                    <p>
+                        Project Coordination,
+                        Frontend Backend Development & Leadership
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Member 3 -->
+            <div class="team-card">
+
+                <div class="member-photo">
+                    <span>M3</span>
+                </div>
+
+                <div class="member-info">
+
+                    <h3>Rounak Mal</h3>
+
+                    <span class="member-role">
+                        Team Member
+                    </span>
+
+                    <p>
+                        Design & Frontend Development
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Member 4 -->
+            <div class="team-card">
+
+                <div class="member-photo">
+                    <span>M4</span>
+                </div>
+
+                <div class="member-info">
+
+                    <h3>Rudrapriya Kundu</h3>
+
+                    <span class="member-role">
+                        Team Member
+                    </span>
+
+                    <p>
+                        Research & Backend Development
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Member 5 -->
+            <div class="team-card">
+
+                <div class="member-photo">
+                    <span>M5</span>
+                </div>
+
+                <div class="member-info">
+
+                    <h3>Swarnabha Rakshit</h3>
+
+                    <span class="member-role">
+                        Team Member
+                    </span>
+
+                    <p>
+                        Development & Testing
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Member 6 -->
+            <div class="team-card">
+
+                <div class="member-photo">
+                    <span>M6</span>
+                </div>
+
+                <div class="member-info">
+
+                    <h3>Ishita Sinha</h3>
+
+                    <span class="member-role">
+                        Team Member
+                    </span>
+
+                    <p>
+                        Research & Backend Development
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+        <!-- =========================================================
+     CONTACT SECTION
+========================================================= -->
+
+<section id="contact" class="contact-section">
+
+    <div class="contact-container">
+
+        <!-- =================================================
+             SECTION HEADING
+        ================================================== -->
+
+        <div class="contact-heading">
+
+            <span class="section-label">
+                CONTACT US
+            </span>
+
+            <h2>
+                Let's <span>Connect</span>
+            </h2>
+
+            <p>
+                Have a question, suggestion, or feedback?
+                We'd love to hear from you.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             CONTACT CONTENT
+        ================================================== -->
+
+        <div class="contact-content">
+
+
+            <!-- =============================================
+                 LEFT SIDE — CONTACT INFORMATION
+            ============================================== -->
+
+            <div class="contact-info">
+
+                <div class="contact-info-heading">
+
+                    <span>
+                        GET IN TOUCH
+                    </span>
+
+                    <h3>
+                        We're here to help.
+                    </h3>
+
+                    <p>
+                        Whether you have a question about
+                        MAUSAM+, weather information, or
+                        our project, feel free to reach out.
+                    </p>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="contact-info-card">
+
+                    <div class="contact-card-icon">
+                        ✉️
+                    </div>
+
+                    <div>
+
+                        <span>
+                            EMAIL
+                        </span>
+
+                        <h4>
+                            mausamplus@gmail.com
+                        </h4>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Phone -->
+
+                <div class="contact-info-card">
+
+                    <div class="contact-card-icon">
+                        📞
+                    </div>
+
+                    <div>
+
+                        <span>
+                            PHONE
+                        </span>
+
+                        <h4>
+                            +91 9434765605
+                        </h4>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Location -->
+
+                <div class="contact-info-card">
+
+                    <div class="contact-card-icon">
+                        📍
+                    </div>
+
+                    <div>
+
+                        <span>
+                            LOCATION
+                        </span>
+
+                        <h4>
+                            India
+                        </h4>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Project -->
+
+                <div class="contact-project-card">
+
+                    <div class="project-icon">
+                        🌤️
+                    </div>
+
+                    <div>
+
+                        <span>
+                            MAUSAM+
+                        </span>
+
+                        <p>
+                            Accurate Weather.
+                            Better Decisions.
+                            Every Day.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 RIGHT SIDE — CONTACT FORM
+            ============================================== -->
+
+            <div class="contact-form-card">
+
+                <div class="form-heading">
+
+                    <h3>
+                        Send us a message
+                    </h3>
+
+                    <p>
+                        Fill in the details below and
+                        we'll get back to you.
+                    </p>
+
+                </div>
+
+
+                <form id="contactForm">
+
+
+                    <!-- Name -->
+
+                    <div class="form-group">
+
+                        <label for="contactName">
+                            Your Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="contactName"
+                            name="name"
+                            placeholder="Enter your name"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="contactEmail">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="contactEmail"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Subject -->
+
+                    <div class="form-group">
+
+                        <label for="contactSubject">
+                            Subject
+                        </label>
+
+                        <input
+                            type="text"
+                            id="contactSubject"
+                            name="subject"
+                            placeholder="What is this about?"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Message -->
+
+                    <div class="form-group">
+
+                        <label for="contactMessage">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="contactMessage"
+                            name="message"
+                            rows="5"
+                            placeholder="Write your message here..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="contact-submit-btn">
+
+                        <span>
+                            Send Message
+                        </span>
+
+                        <span class="submit-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <!-- Success Message -->
+
+                    <div
+                        id="contactSuccess"
+                        class="contact-success">
+
+                        ✓ Message submitted successfully!
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+            <!-- =================================================
+                BOTTOM MESSAGE
+            ================================================== -->
+
+            <div class="contact-bottom">
+
+                <div class="contact-bottom-line"></div>
+
+                <p>
+                    Thank you for choosing
+                    <strong>MAUSAM+</strong>
+                </p>
+
+                <div class="contact-bottom-line"></div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 MAUSAM+ Command Center. All Rights Reserved.
+        </p>
+
+        <p class="footer-credit">
+            Weather Intelligence • Real-Time Data • Better Decisions
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript file -->
+    <script src="script.js"></script>
+
+</body>
+</html>

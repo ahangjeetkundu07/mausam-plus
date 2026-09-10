@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1628">
+  <title>MAUSAM+ Admin Dashboard</title>
+
+  <style>
+    :root {
+      --navy: #0b1628;
+      --navy-2: #12213a;
+      --blue: #2f80ed;
+      --blue-soft: #eaf3ff;
+      --text: #142033;
+      --muted: #6b778c;
+      --line: #e7ebf2;
+      --surface: #ffffff;
+      --bg: #f3f7fb;
+      --danger: #d64545;
+      --danger-soft: #fff0f0;
+      --success: #18875b;
+      --success-soft: #eaf9f2;
+      --shadow: 0 18px 55px rgba(15, 31, 55, 0.10);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(47,128,237,.10), transparent 28%),
+        radial-gradient(circle at 95% 10%, rgba(70,190,220,.10), transparent 25%),
+        var(--bg);
+    }
+
+    button, input { font: inherit; }
+    button { border: 0; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11, 22, 40, .96);
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(6, 17, 32, .18);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      min-height: 76px;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 13px; }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #5aa5ff, #2168ca);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 8px 20px rgba(47,128,237,.30);
+      font-size: 21px;
+    }
+
+    .brand-title { font-size: 19px; font-weight: 800; letter-spacing: -.3px; }
+    .brand-subtitle { margin-top: 2px; color: #aebbd0; font-size: 12px; }
+
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      color: #dbe8f8;
+      background: rgba(255,255,255,.06);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #48d597;
+      box-shadow: 0 0 0 5px rgba(72,213,151,.10);
+    }
+
+    .page {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 28px 55px;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: -1.4px; }
+    .hero-copy { margin: 9px 0 0; color: var(--muted); max-width: 690px; line-height: 1.6; }
+
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .btn {
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 750;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { color: #fff; background: var(--navy); box-shadow: 0 8px 18px rgba(11,22,40,.16); }
+    .btn-light { color: var(--text); background: #fff; border: 1px solid var(--line); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .stat {
+      position: relative;
+      overflow: hidden;
+      padding: 21px;
+      border: 1px solid rgba(226,232,241,.9);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 10px 32px rgba(15,31,55,.06);
+    }
+
+    .stat::after {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      right: -35px;
+      top: -38px;
+      background: var(--blue-soft);
+    }
+
+    .stat-label { color: var(--muted); font-size: 12px; font-weight: 750; text-transform: uppercase; letter-spacing: .7px; }
+    .stat-value { margin-top: 8px; font-size: 30px; font-weight: 850; letter-spacing: -1px; }
+    .stat-note { margin-top: 3px; color: var(--muted); font-size: 12px; }
+
+    .panel {
+      overflow: hidden;
+      border: 1px solid rgba(226,232,241,.9);
+      border-radius: 24px;
+      background: rgba(255,255,255,.94);
+      box-shadow: var(--shadow);
+    }
+
+    .panel-head { padding: 22px 22px 18px; border-bottom: 1px solid var(--line); }
+    .panel-title-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .panel-title { margin: 0; font-size: 21px; letter-spacing: -.4px; }
+    .panel-subtitle { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+
+    .toolbar { display: flex; gap: 10px; align-items: center; margin-top: 18px; }
+
+    .search-wrap { position: relative; flex: 1; }
+    .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #8994a7; pointer-events: none; }
+
+    .search {
+      width: 100%;
+      height: 46px;
+      padding: 0 15px 0 42px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      outline: none;
+      color: var(--text);
+      background: #f9fbfd;
+    }
+
+    .search:focus { border-color: #8cbaf5; box-shadow: 0 0 0 4px rgba(47,128,237,.10); background: #fff; }
+
+    .select {
+      height: 46px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #f9fbfd;
+      color: var(--text);
+      outline: none;
+    }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 900px; }
+    th, td { padding: 16px 18px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; }
+    th { background: #f8fafc; color: #768298; font-size: 11px; letter-spacing: .8px; text-transform: uppercase; white-space: nowrap; }
+    td { font-size: 13px; }
+    tbody tr { transition: background .14s ease; }
+    tbody tr:hover { background: #f8fbff; }
+    tbody tr:last-child td { border-bottom: 0; }
+
+    .name-cell { display: flex; align-items: center; gap: 11px; min-width: 170px; }
+    .avatar {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #eaf3ff, #dcecff);
+      color: #276fc9;
+      font-weight: 850;
+    }
+
+    .name { font-weight: 800; }
+    .email { margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .subject { font-weight: 750; min-width: 145px; }
+    .message-preview { max-width: 360px; color: #5d687a; line-height: 1.5; }
+    .date { color: var(--muted); white-space: nowrap; font-size: 12px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: var(--success);
+      background: var(--success-soft);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .row-actions { display: flex; gap: 7px; justify-content: flex-end; }
+    .icon-btn {
+      width: 37px;
+      height: 37px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #526076;
+      background: #f4f7fa;
+      border: 1px solid #e8edf3;
+      transition: all .15s ease;
+    }
+    .icon-btn:hover { color: var(--blue); background: var(--blue-soft); border-color: #cfe2fb; }
+    .icon-btn.danger:hover { color: var(--danger); background: var(--danger-soft); border-color: #ffd3d3; }
+
+    .state { padding: 48px 20px; text-align: center; color: var(--muted); }
+    .state-icon { font-size: 32px; margin-bottom: 8px; }
+    .state-title { color: var(--text); font-weight: 800; }
+    .state-copy { margin-top: 5px; font-size: 13px; }
+
+    .footer { margin-top: 16px; color: #8792a5; text-align: right; font-size: 11px; }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(7, 17, 31, .58);
+      backdrop-filter: blur(6px);
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      width: min(680px, 100%);
+      max-height: min(720px, 90vh);
+      overflow: auto;
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 28px 90px rgba(0,0,0,.25);
+      animation: modalIn .18s ease-out;
+    }
+
+    @keyframes modalIn { from { opacity: 0; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: none; } }
+
+    .modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; padding: 23px; border-bottom: 1px solid var(--line); }
+    .modal-kicker { color: var(--blue); font-size: 11px; font-weight: 850; text-transform: uppercase; letter-spacing: 1px; }
+    .modal h3 { margin: 5px 0 0; font-size: 22px; }
+    .close-btn { width: 36px; height: 36px; border-radius: 10px; cursor: pointer; background: #f3f6f9; color: #556177; font-size: 19px; }
+    .modal-body { padding: 23px; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .detail { padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: #fbfcfe; }
+    .detail.full { grid-column: 1 / -1; }
+    .detail-label { color: #8994a6; font-size: 10px; font-weight: 850; letter-spacing: .8px; text-transform: uppercase; }
+    .detail-value { margin-top: 6px; color: var(--text); font-size: 14px; line-height: 1.6; word-break: break-word; }
+    .detail-value.message { white-space: pre-wrap; }
+    .modal-foot { display: flex; justify-content: flex-end; gap: 9px; padding: 18px 23px; border-top: 1px solid var(--line); }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 80;
+      max-width: min(380px, calc(100vw - 44px));
+      padding: 13px 16px;
+      border-radius: 13px;
+      color: #fff;
+      background: var(--navy);
+      box-shadow: 0 15px 45px rgba(8,20,38,.22);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: .2s ease;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .toast.show { opacity: 1; transform: none; }
+    .toast.success { background: #176d4b; }
+    .toast.error { background: #9e3333; }
+
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: 1fr; }
+      .hero { align-items: flex-start; flex-direction: column; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+    }
+
+    @media (max-width: 620px) {
+      .topbar-inner, .page { padding-left: 16px; padding-right: 16px; }
+      .topbar-inner { min-height: 68px; }
+      .live-pill { display: none; }
+      .hero-actions { width: 100%; }
+      .hero-actions .btn { flex: 1; }
+      .panel-head { padding: 18px 15px; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .detail.full { grid-column: auto; }
+      .modal-backdrop { padding: 10px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">☁</div>
+        <div>
+          <div class="brand-title">MAUSAM+</div>
+          <div class="brand-subtitle">Weather intelligence • Admin</div>
+        </div>
+      </div>
+      <div class="live-pill"><span class="live-dot"></span> System connected</div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Control centre</p>
+        <h1>Admin Dashboard</h1>
+        <p class="hero-copy">Monitor feedback and contact requests from the MAUSAM+ weather experience in one clean workspace.</p>
+      </div>
+      <div class="hero-actions">
+        <button class="btn btn-light" id="clearSearch" type="button">Clear search</button>
+        <button class="btn btn-primary" id="refreshMessages" type="button">↻ &nbsp; Refresh</button>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Message statistics">
+      <article class="stat">
+        <div class="stat-label">Total messages</div>
+        <div class="stat-value" id="totalCount">—</div>
+        <div class="stat-note">All saved contact requests</div>
+      </article>
+      <article class="stat">
+        <div class="stat-label">Visible results</div>
+        <div class="stat-value" id="visibleCount">—</div>
+        <div class="stat-note">After search and filter</div>
+      </article>
+      <article class="stat">
+        <div class="stat-label">Latest activity</div>
+        <div class="stat-value" id="latestActivity">—</div>
+        <div class="stat-note" id="latestActivityNote">Waiting for messages</div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div class="panel-title-row">
+          <div>
+            <h2 class="panel-title">Contact Messages</h2>
+            <p class="panel-subtitle" id="messageCount">Loading messages…</p>
+          </div>
+          <span class="badge">Live data</span>
+        </div>
+
+        <div class="toolbar">
+          <div class="search-wrap">
+            <span class="search-icon">⌕</span>
+            <input class="search" id="searchInput" type="search" placeholder="Search name, email, subject or message…" autocomplete="off">
+          </div>
+          <select class="select" id="sortSelect" aria-label="Sort messages">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="name">Name A–Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Sender</th>
+              <th>Subject</th>
+              <th>Message</th>
+              <th>Received</th>
+              <th>Status</th>
+              <th style="text-align:right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="messagesTableBody">
+            <tr><td colspan="6"><div class="state"><div class="state-icon">◌</div><div class="state-title">Loading messages…</div></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="footer">MAUSAM+ Admin • Contact data is stored locally by the backend.</div>
+  </main>
+
+  <div class="modal-backdrop" id="messageModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <div class="modal-kicker">Message details</div>
+          <h3 id="modalTitle">Contact message</h3>
+        </div>
+        <button class="close-btn" id="closeModal" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="detail-grid">
+          <div class="detail"><div class="detail-label">Name</div><div class="detail-value" id="detailName">—</div></div>
+          <div class="detail"><div class="detail-label">Email</div><div class="detail-value" id="detailEmail">—</div></div>
+          <div class="detail"><div class="detail-label">Subject</div><div class="detail-value" id="detailSubject">—</div></div>
+          <div class="detail"><div class="detail-label">Received</div><div class="detail-value" id="detailDate">—</div></div>
+          <div class="detail"><div class="detail-label">Message ID</div><div class="detail-value" id="detailId">—</div></div>
+          <div class="detail full"><div class="detail-label">Message</div><div class="detail-value message" id="detailMessage">—</div></div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-light" id="closeModalBottom" type="button">Close</button>
+        <button class="btn btn-primary" id="replyButton" type="button">Reply by email</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const tableBody = document.getElementById("messagesTableBody");
+    const messageCount = document.getElementById("messageCount");
+    const totalCount = document.getElementById("totalCount");
+    const visibleCount = document.getElementById("visibleCount");
+    const latestActivity = document.getElementById("latestActivity");
+    const latestActivityNote = document.getElementById("latestActivityNote");
+    const refreshButton = document.getElementById("refreshMessages");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const clearSearch = document.getElementById("clearSearch");
+    const modal = document.getElementById("messageModal");
+    const toast = document.getElementById("toast");
+
+    let messages = [];
+    let activeMessage = null;
+    let toastTimer = null;
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatDate(value) {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "Unknown date";
+      return date.toLocaleString(undefined, {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      });
+    }
+
+    function relativeTime(value) {
+      const date = new Date(value);
+      const diff = Date.now() - date.getTime();
+      if (!Number.isFinite(diff)) return "—";
+      const minutes = Math.max(0, Math.floor(diff / 60000));
+      if (minutes < 1) return "Just now";
+      if (minutes < 60) return `${minutes}m ago`;
+      const hours = Math.floor(minutes / 60);
+      if (hours < 24) return `${hours}h ago`;
+      const days = Math.floor(hours / 24);
+      if (days < 7) return `${days}d ago`;
+      return formatDate(value).split(",")[0];
+    }
+
+    function initials(name) {
+      const parts = String(name || "?").trim().split(/\s+/).filter(Boolean);
+      if (!parts.length) return "?";
+      return (parts[0][0] + (parts[1]?.[0] || "")).toUpperCase();
+    }
+
+    function showToast(message, type = "") {
+      clearTimeout(toastTimer);
+      toast.textContent = message;
+      toast.className = `toast show ${type}`.trim();
+      toastTimer = setTimeout(() => { toast.className = "toast"; }, 2800);
+    }
+
+    function filteredMessages() {
+      const term = searchInput.value.trim().toLowerCase();
+      let list = [...messages];
+
+      if (term) {
+        list = list.filter(message => [
+          message.name,
+          message.email,
+          message.subject,
+          message.message,
+          message.id
+        ].some(value => String(value ?? "").toLowerCase().includes(term)));
+      }
+
+      const sort = sortSelect.value;
+      if (sort === "newest") {
+        list.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      } else if (sort === "oldest") {
+        list.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      } else if (sort === "name") {
+        list.sort((a, b) => String(a.name).localeCompare(String(b.name)));
+      }
+      return list;
+    }
+
+    function renderMessages() {
+      const list = filteredMessages();
+      visibleCount.textContent = list.length;
+      messageCount.textContent = `${list.length} of ${messages.length} message${messages.length === 1 ? "" : "s"}`;
+
+      if (!list.length) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="6">
+              <div class="state">
+                <div class="state-icon">⌕</div>
+                <div class="state-title">No matching messages</div>
+                <div class="state-copy">Try a different search term or clear the search.</div>
+              </div>
+            </td>
+          </tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = list.map(message => `
+        <tr>
+          <td>
+            <div class="name-cell">
+              <div class="avatar">${escapeHtml(initials(message.name))}</div>
+              <div>
+                <div class="name">${escapeHtml(message.name)}</div>
+                <div class="email">${escapeHtml(message.email)}</div>
+              </div>
+            </div>
+          </td>
+          <td><div class="subject">${escapeHtml(message.subject)}</div></td>
+          <td><div class="message-preview">${escapeHtml(message.message)}</div></td>
+          <td><div class="date" title="${escapeHtml(formatDate(message.createdAt))}">${escapeHtml(relativeTime(message.createdAt))}</div></td>
+          <td><span class="badge">Received</span></td>
+          <td>
+            <div class="row-actions">
+              <button class="icon-btn" type="button" title="View message" aria-label="View message" data-action="view" data-id="${escapeHtml(message.id)}">↗</button>
+              <button class="icon-btn danger" type="button" title="Delete message" aria-label="Delete message" data-action="delete" data-id="${escapeHtml(message.id)}">⌫</button>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function updateStats() {
+      totalCount.textContent = messages.length;
+      const newest = [...messages].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+      if (!newest) {
+        latestActivity.textContent = "—";
+        latestActivityNote.textContent = "Waiting for messages";
+        return;
+      }
+      latestActivity.textContent = relativeTime(newest.createdAt);
+      latestActivityNote.textContent = `From ${newest.name || "user"}`;
+    }
+
+    async function loadMessages(showLoading = true) {
+      if (showLoading) {
+        tableBody.innerHTML = `<tr><td colspan="6"><div class="state"><div class="state-icon">◌</div><div class="state-title">Loading messages…</div></div></td></tr>`;
+      }
+
+      refreshButton.disabled = true;
+      refreshButton.textContent = "Refreshing…";
+
+      try {
+        const response = await fetch("/api/contact/messages", { cache: "no-store" });
+        const data = await response.json();
+        if (!response.ok || !data.success) throw new Error(data.message || "Could not load messages.");
+
+        messages = Array.isArray(data.messages) ? data.messages : [];
+        updateStats();
+        renderMessages();
+        showToast("Messages refreshed.", "success");
+      } catch (error) {
+        console.error("Error loading contact messages:", error);
+        messageCount.textContent = "Unable to load messages";
+        tableBody.innerHTML = `<tr><td colspan="6"><div class="state"><div class="state-icon">!</div><div class="state-title">Could not load messages</div><div class="state-copy">${escapeHtml(error.message)}</div></div></td></tr>`;
+        showToast(error.message, "error");
+      } finally {
+        refreshButton.disabled = false;
+        refreshButton.textContent = "↻  Refresh";
+      }
+    }
+
+    function openModal(message) {
+      activeMessage = message;
+      document.getElementById("modalTitle").textContent = message.subject || "Contact message";
+      document.getElementById("detailName").textContent = message.name || "—";
+      document.getElementById("detailEmail").textContent = message.email || "—";
+      document.getElementById("detailSubject").textContent = message.subject || "—";
+      document.getElementById("detailDate").textContent = formatDate(message.createdAt);
+      document.getElementById("detailId").textContent = message.id || "—";
+      document.getElementById("detailMessage").textContent = message.message || "—";
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      activeMessage = null;
+    }
+
+    async function deleteMessage(id) {
+      const message = messages.find(item => String(item.id) === String(id));
+      if (!message) return;
+
+      const confirmed = window.confirm(`Delete the message from ${message.name}?\n\nThis action cannot be undone.`);
+      if (!confirmed) return;
+
+      try {
+        const response = await fetch(`/api/contact/messages/${encodeURIComponent(message.id)}`, {
+          method: "DELETE"
+        });
+        const data = await response.json();
+        if (!response.ok || !data.success) throw new Error(data.message || "Could not delete message.");
+
+        messages = messages.filter(item => String(item.id) !== String(id));
+        if (activeMessage && String(activeMessage.id) === String(id)) closeModal();
+        updateStats();
+        renderMessages();
+        showToast("Message deleted.", "success");
+      } catch (error) {
+        console.error("Error deleting message:", error);
+        showToast(error.message, "error");
+      }
+    }
+
+    tableBody.addEventListener("click", event => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+      const id = button.dataset.id;
+      const message = messages.find(item => String(item.id) === String(id));
+      if (!message) return;
+
+      if (button.dataset.action === "view") openModal(message);
+      if (button.dataset.action === "delete") deleteMessage(id);
+    });
+
+    refreshButton.addEventListener("click", () => loadMessages(true));
+    searchInput.addEventListener("input", renderMessages);
+    sortSelect.addEventListener("change", renderMessages);
+    clearSearch.addEventListener("click", () => {
+      searchInput.value = "";
+      sortSelect.value = "newest";
+      renderMessages();
+      searchInput.focus();
+    });
+
+    document.getElementById("closeModal").addEventListener("click", closeModal);
+    document.getElementById("closeModalBottom").addEventListener("click", closeModal);
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeModal();
+    });
+
+    document.getElementById("replyButton").addEventListener("click", () => {
+      if (!activeMessage?.email) return;
+      window.location.href = `mailto:${activeMessage.email}?subject=${encodeURIComponent("Re: " + (activeMessage.subject || "MAUSAM+ Contact"))}`;
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeModal();
+    });
+
+    loadMessages(true);
+  </script>
+</body>
+</html>

@@ -1,0 +1,6739 @@
+/* =========================================================
+   MAUSAM+ WEATHER WEBSITE
+   Main Stylesheet
+========================================================= */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 140px;
+}
+
+body {
+    font-family: "Inter", Arial, sans-serif;
+    background: #020b24;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   2. MAIN BACKGROUND
+========================================================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(0, 100, 255, 0.15),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(0, 150, 255, 0.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(0, 100, 255, 0.08),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #01091e 0%,
+            #021137 45%,
+            #001332 100%
+        );
+
+    z-index: -10;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   3. WORLD MAP EFFECT
+========================================================= */
+
+.world-map {
+    position: absolute;
+    width: 75%;
+    height: 50%;
+    left: 12.5%;
+    top: 25%;
+
+    opacity: 0.16;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(0, 150, 255, 0.6) 1px,
+            transparent 1.5px
+        );
+
+    background-size: 6px 6px;
+
+    mask-image:
+        radial-gradient(
+            ellipse,
+            black 20%,
+            transparent 72%
+        );
+
+    -webkit-mask-image:
+        radial-gradient(
+            ellipse,
+            black 20%,
+            transparent 72%
+        );
+
+    transform: perspective(500px) rotateX(5deg);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   4. NAVIGATION BAR
+========================================================= */
+
+.navbar {
+    position: fixed;
+
+    top: 10px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: calc(100% - 72px);
+    min-height: 88px;
+
+    margin: 0;
+
+    padding: 0 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(5, 20, 52, 0.82),
+            rgba(2, 13, 39, 0.68)
+        );
+
+    border: 1px solid rgba(0, 115, 255, 0.35);
+
+    border-radius: 22px;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 0 30px rgba(0, 80, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    z-index: 1000;
+}
+
+/* Keep page content clear of the fixed navbar */
+
+main {
+    padding-top: 1px;
+}
+
+
+/* =========================================================
+   5. BRAND / SMALL LOGO
+========================================================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    text-decoration: none;
+    color: white;
+
+    flex-shrink: 0;
+}
+
+.brand-name {
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.plus {
+    color: #159cff;
+}
+
+
+/* Small logo */
+
+.brand-icon {
+    position: relative;
+
+    width: 45px;
+    height: 45px;
+}
+
+
+/* Sun */
+
+.brand-icon .sun {
+    position: absolute;
+
+    width: 17px;
+    height: 17px;
+
+    background: #ffd52f;
+
+    border-radius: 50%;
+
+    top: 4px;
+    right: 4px;
+
+    box-shadow:
+        0 0 12px rgba(255, 213, 47, 0.7);
+}
+
+
+/* Cloud */
+
+.brand-cloud {
+    position: absolute;
+
+    left: 2px;
+    bottom: 4px;
+
+    font-size: 36px;
+
+    line-height: 1;
+
+    color: #159eff;
+
+    text-shadow:
+        0 0 10px rgba(0, 153, 255, 0.7);
+}
+
+
+/* =========================================================
+   6. NAVIGATION LINKS
+========================================================= */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 46px;
+}
+
+.nav-link {
+    position: relative;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    text-decoration: none;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    padding: 32px 0 27px;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #25b9ff;
+    transform: translateY(-1px);
+}
+
+
+/* Active navigation */
+
+.nav-link.active {
+    color: #19b7ff;
+}
+
+
+/* Active underline */
+
+.nav-link.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    bottom: 9px;
+
+    height: 3px;
+
+    background: #19b7ff;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 12px rgba(25, 183, 255, 0.8);
+}
+
+
+/* =========================================================
+   7. HERO SECTION
+========================================================= */
+
+.hero {
+    min-height: 100svh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    /* Space below the fixed navbar */
+    padding: 110px 20px 70px;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   8. MAIN WEATHER LOGO
+========================================================= */
+
+.main-logo {
+    position: relative;
+
+    width: 390px;
+    height: 310px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 5px;
+}
+
+
+/* Circular crescent container */
+
+.logo-circle {
+    position: relative;
+
+    width: 310px;
+    height: 310px;
+
+    border-radius: 50%;
+
+    transform: rotate(-15deg);
+
+    filter:
+        drop-shadow(
+            0 0 20px rgba(0, 153, 255, 0.18)
+        );
+}
+
+
+/* =========================================================
+   9. CRESCENT
+========================================================= */
+
+.crescent {
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    left: 12px;
+    top: 35px;
+
+    border-radius: 50%;
+
+    border: 25px solid transparent;
+
+    border-left-color: #27d5ff;
+    border-bottom-color: #158cff;
+
+    transform: rotate(30deg);
+
+    filter:
+        drop-shadow(
+            0 0 10px rgba(0, 176, 255, 0.45)
+        );
+}
+
+
+/* =========================================================
+   10. LARGE SUN
+========================================================= */
+
+.large-sun {
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    top: 50px;
+    left: 145px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffe66d,
+            #ffc400 55%,
+            #ff9d00 100%
+        );
+
+    box-shadow:
+        0 0 22px rgba(255, 193, 0, 0.6),
+        0 0 50px rgba(255, 174, 0, 0.2);
+}
+
+
+/* Sun rays */
+
+.sun-ray {
+    position: absolute;
+
+    width: 11px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    background: #ffc928;
+
+    left: 50%;
+    top: -28px;
+
+    transform-origin: 50% 78px;
+}
+
+
+/* Individual rays */
+
+.ray-1 {
+    transform: translateX(-50%) rotate(0deg);
+}
+
+.ray-2 {
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.ray-3 {
+    transform: translateX(-50%) rotate(90deg);
+}
+
+.ray-4 {
+    transform: translateX(-50%) rotate(135deg);
+}
+
+.ray-5 {
+    transform: translateX(-50%) rotate(180deg);
+}
+
+.ray-6 {
+    transform: translateX(-50%) rotate(225deg);
+}
+
+.ray-7 {
+    transform: translateX(-50%) rotate(270deg);
+}
+
+.ray-8 {
+    transform: translateX(-50%) rotate(315deg);
+}
+
+
+/* =========================================================
+   11. MAIN CLOUD
+========================================================= */
+
+.main-cloud {
+    position: absolute;
+
+    width: 230px;
+    height: 110px;
+
+    left: 115px;
+    top: 120px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #36c8ff 0%,
+            #078ae9 50%,
+            #0057bf 100%
+        );
+
+    border-radius:
+        100px
+        100px
+        45px
+        45px;
+
+    box-shadow:
+        0 15px 25px rgba(0, 92, 255, 0.25),
+
+        inset 0 2px 5px
+        rgba(255, 255, 255, 0.3);
+}
+
+
+/* Cloud bumps */
+
+.cloud-part {
+    position: absolute;
+
+    background:
+        linear-gradient(
+            180deg,
+            #38caff,
+            #087fd8
+        );
+
+    border-radius: 50%;
+}
+
+
+/* Left bump */
+
+.cloud-part-1 {
+    width: 85px;
+    height: 85px;
+
+    left: 20px;
+    top: -35px;
+}
+
+
+/* Middle bump */
+
+.cloud-part-2 {
+    width: 105px;
+    height: 105px;
+
+    left: 70px;
+    top: -55px;
+}
+
+
+/* Right bump */
+
+.cloud-part-3 {
+    width: 82px;
+    height: 82px;
+
+    right: 18px;
+    top: -28px;
+}
+
+
+/* =========================================================
+   12. RAIN
+========================================================= */
+
+.rain {
+    position: absolute;
+
+    left: 160px;
+    top: 235px;
+
+    display: flex;
+
+    gap: 25px;
+}
+
+
+/* Rain drops */
+
+.rain span {
+    width: 12px;
+    height: 35px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0cc7ff,
+            #0878dc
+        );
+
+    border-radius: 10px;
+
+    transform: rotate(25deg);
+
+    box-shadow:
+        0 0 8px rgba(0, 180, 255, 0.35);
+}
+
+
+/* =========================================================
+   13. MAIN TITLE
+========================================================= */
+
+.main-title {
+    font-size: clamp(65px, 7vw, 108px);
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    margin-top: 30px;
+
+    color: #f5f7ff;
+
+    text-shadow:
+        0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+
+/* Blue + */
+
+.main-title span {
+    color: #008dff;
+
+    text-shadow:
+        0 0 18px rgba(0, 145, 255, 0.55);
+}
+
+
+/* =========================================================
+   14. COMMAND CENTER
+========================================================= */
+
+.command-center {
+    margin-top: 24px;
+
+    font-size: 29px;
+
+    font-weight: 500;
+
+    letter-spacing: 12px;
+
+    color: #168eea;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 15px rgba(0, 142, 255, 0.3);
+}
+
+
+/* =========================================================
+   15. DIVIDER
+========================================================= */
+
+.divider {
+    width: 390px;
+
+    margin-top: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* Lines */
+
+.divider-line {
+    height: 1px;
+
+    flex: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #158eff,
+            transparent
+        );
+
+    opacity: 0.7;
+}
+
+
+/* Center dot */
+
+.divider-dot {
+    width: 9px;
+    height: 9px;
+
+    margin: 0 8px;
+
+    border-radius: 50%;
+
+    background: #1cb9ff;
+
+    box-shadow:
+        0 0 8px #1cb9ff,
+        0 0 20px rgba(28, 185, 255, 0.8);
+}
+
+
+/* =========================================================
+   16. TAGLINE
+========================================================= */
+
+.tagline {
+    margin-top: 20px;
+
+    font-size: 20px;
+
+    font-weight: 400;
+
+    color: rgba(235, 242, 255, 0.8);
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   17. DECORATIVE WEATHER ICONS
+========================================================= */
+
+.background .weather-icon {
+    position: absolute;
+
+    color: rgba(55, 145, 255, 0.3);
+
+    font-size: 65px;
+
+    pointer-events: none;
+}
+
+
+/* Storm */
+
+.storm-icon {
+    left: 8%;
+    top: 27%;
+
+    font-size: 68px;
+}
+
+.storm-icon span {
+    display: block;
+
+    margin-top: -25px;
+
+    color: rgba(45, 153, 255, 0.35);
+
+    font-size: 45px;
+}
+
+
+/* Cloud */
+
+.cloud-icon {
+    right: 9%;
+    top: 30%;
+
+    font-size: 72px;
+}
+
+
+/* Wind */
+
+.wind-icon {
+    left: 11%;
+    top: 57%;
+
+    font-size: 75px;
+}
+
+
+/* Night */
+
+.night-icon {
+    right: 8%;
+    top: 58%;
+
+    font-size: 65px;
+}
+
+
+/* =========================================================
+   18. BOTTOM CLOUDS
+========================================================= */
+
+.cloud-cloud {
+    position: absolute;
+
+    bottom: -100px;
+
+    width: 450px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(15, 90, 180, 0.35),
+            rgba(4, 37, 90, 0.05) 70%,
+            transparent 100%
+        );
+
+    filter: blur(12px);
+}
+
+
+/* Left cloud */
+
+.cloud-left {
+    left: -120px;
+
+    transform: rotate(-10deg);
+}
+
+
+/* Right cloud */
+
+.cloud-right {
+    right: -120px;
+
+    transform: rotate(10deg);
+}
+
+
+/* =========================================================
+   19. OTHER SECTIONS
+========================================================= */
+
+.weather-section {
+    min-height: 100vh;
+    height: 100vh;
+
+    padding: 120px 8%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            rgba(0, 15, 45, 0.7)
+        );
+
+    scroll-margin-top: -120px;
+}
+
+
+/* Section container */
+
+.section-container {
+    width: 100%;
+    max-width: 1100px;
+
+    padding: 50px;
+
+    text-align: center;
+
+    border: 1px solid rgba(0, 130, 255, 0.2);
+
+    border-radius: 25px;
+
+    background:
+        rgba(5, 24, 60, 0.45);
+
+    backdrop-filter: blur(12px);
+}
+
+
+/* Section heading */
+
+.section-container h2 {
+    font-size: 42px;
+
+    margin-bottom: 20px;
+
+    color: #ffffff;
+}
+
+
+/* Section paragraph */
+
+.section-container p {
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    color: rgba(225, 235, 255, 0.7);
+}
+
+
+/* =========================================================
+   20. FOOTER
+========================================================= */
+
+.footer {
+    padding: 35px 20px;
+
+    text-align: center;
+
+    border-top: 1px solid rgba(0, 130, 255, 0.15);
+
+    background:
+        rgba(0, 7, 25, 0.7);
+
+    color: rgba(220, 230, 255, 0.55);
+
+    font-size: 14px;
+}
+
+
+.footer-credit {
+    margin-top: 8px;
+
+    color: rgba(20, 150, 255, 0.7);
+}
+
+
+/* =========================================================
+   21. RESPONSIVE DESIGN — TABLETS
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .navbar {
+        width: calc(100% - 40px);
+    }
+
+    .nav-links {
+        gap: 22px;
+    }
+
+    .nav-link {
+        font-size: 14px;
+    }
+
+    .brand-name {
+        font-size: 23px;
+    }
+
+    .main-title {
+        font-size: 80px;
+    }
+
+}
+
+
+/* =========================================================
+   22. RESPONSIVE DESIGN — MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        width: calc(100% - 25px);
+
+        margin-top: 15px;
+
+        padding: 15px 20px;
+
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+
+    .nav-links {
+        width: 100%;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        gap: 25px;
+
+        padding-bottom: 5px;
+    }
+
+
+    .nav-link {
+        white-space: nowrap;
+
+        padding: 8px 0 15px;
+    }
+
+
+    .nav-link.active::after {
+        bottom: 0;
+    }
+
+
+    .hero {
+        min-height: 100svh;
+
+        padding-top: 170px;
+    }
+
+
+    .main-logo {
+        transform: scale(0.78);
+
+        margin-top: -25px;
+
+        margin-bottom: -35px;
+    }
+
+
+    .main-title {
+        font-size: 62px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .command-center {
+        font-size: 20px;
+
+        letter-spacing: 7px;
+    }
+
+
+    .divider {
+        width: 280px;
+    }
+
+
+    .tagline {
+        font-size: 16px;
+    }
+
+
+    .background .weather-icon {
+    opacity: 0.5;
+    transform: scale(0.7);
+
+    }
+
+}
+
+
+/* =========================================================
+   23. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .brand-name {
+        font-size: 21px;
+    }
+
+
+    .brand-icon {
+        transform: scale(0.85);
+    }
+
+
+    .main-logo {
+        transform: scale(0.62);
+
+        margin-top: -55px;
+
+        margin-bottom: -75px;
+    }
+
+
+    .main-title {
+        font-size: 48px;
+
+        letter-spacing: 1px;
+    }
+
+
+    .command-center {
+        font-size: 15px;
+
+        letter-spacing: 5px;
+    }
+
+
+    .tagline {
+        font-size: 14px;
+
+        max-width: 330px;
+
+        line-height: 1.6;
+    }
+
+
+    .divider {
+        width: 220px;
+    }
+
+
+    .weather-section {
+        padding: 80px 20px;
+    }
+
+
+    .section-container {
+        padding: 35px 20px;
+    }
+
+
+    .section-container h2 {
+        font-size: 30px;
+    }
+
+
+    .section-container p {
+        font-size: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   24. SIMPLE ANIMATIONS
+========================================================= */
+
+
+/* Floating weather logo */
+
+@keyframes floatingLogo {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* Apply floating effect */
+
+.logo-circle {
+    animation:
+        floatingLogo 5s ease-in-out infinite;
+}
+
+
+/* Glowing divider */
+
+@keyframes glowingDot {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        box-shadow:
+            0 0 6px #1cb9ff;
+    }
+
+    50% {
+        opacity: 1;
+        box-shadow:
+            0 0 12px #1cb9ff,
+            0 0 25px rgba(28, 185, 255, 0.8);
+    }
+
+}
+
+.divider-dot {
+    animation:
+        glowingDot 2s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   25. ACCESSIBILITY
+========================================================= */
+
+.nav-link:focus-visible {
+    outline: 2px solid #18b5ff;
+
+    outline-offset: 6px;
+
+    border-radius: 4px;
+}
+
+
+/* =========================================================
+   END OF MAUSAM+ CSS
+========================================================= */
+
+/* =========================================================
+   ABOUT US SECTION
+========================================================= */
+
+.about-section {
+    min-height: 100vh;
+
+    padding: 120px 7%;
+
+    scroll-margin-top: -100px;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(0, 115, 255, 0.12),
+            transparent 45%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(1, 10, 30, 0.4),
+            rgba(1, 15, 45, 0.9)
+        );
+}
+
+
+/* Main container */
+
+.about-container {
+    width: 100%;
+    max-width: 1250px;
+    margin: auto;
+}
+
+
+/* =========================================================
+   ABOUT HEADING
+========================================================= */
+
+.about-heading {
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 70px;
+}
+
+
+/* Small label */
+
+.section-label {
+    display: inline-block;
+
+    margin-bottom: 15px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    color: #18aaff;
+}
+
+
+/* Main heading */
+
+.about-heading h2,
+.team-heading h2 {
+    font-size: clamp(38px, 4vw, 55px);
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: #ffffff;
+}
+
+
+/* Blue highlighted word */
+
+.about-heading h2 span,
+.team-heading h2 span {
+    color: #159eff;
+
+    text-shadow:
+        0 0 18px rgba(21, 158, 255, 0.3);
+}
+
+
+/* Heading paragraph */
+
+.about-heading > p {
+    max-width: 700px;
+
+    margin: 22px auto 0;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: rgba(225, 235, 255, 0.65);
+}
+
+
+/* =========================================================
+   ABOUT CONTENT
+========================================================= */
+
+.about-content {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1.2fr);
+
+    gap: 50px;
+
+    align-items: center;
+
+    margin-bottom: 110px;
+}
+
+
+/* About text */
+
+.about-text {
+    padding: 35px;
+    
+    background:
+        rgba(5, 25, 62, 0.45);
+
+    border: 1px solid
+        rgba(0, 135, 255, 0.2);
+
+    border-radius: 22px;
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+.about-text h3 {
+    font-size: 28px;
+
+    margin-bottom: 20px;
+
+    color: #ffffff;
+}
+
+
+.about-text p {
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    color: rgba(225, 235, 255, 0.68);
+
+    margin-bottom: 18px;
+}
+
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   FEATURE CARDS
+========================================================= */
+
+.about-features {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+
+.feature-card {
+    min-height: 220px;
+
+    padding: 28px 20px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8, 34, 80, 0.75),
+            rgba(3, 19, 49, 0.65)
+        );
+
+    border: 1px solid
+        rgba(0, 137, 255, 0.2);
+
+    border-radius: 20px;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.feature-card:hover {
+    transform: translateY(-7px);
+
+    border-color:
+        rgba(24, 174, 255, 0.55);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 120, 255, 0.12);
+}
+
+
+/* Feature icon */
+
+.feature-icon {
+    font-size: 38px;
+
+    margin-bottom: 18px;
+}
+
+
+/* Feature heading */
+
+.feature-card h4 {
+    font-size: 17px;
+
+    margin-bottom: 12px;
+
+    color: #ffffff;
+}
+
+
+/* Feature description */
+
+.feature-card p {
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: rgba(225, 235, 255, 0.58);
+}
+
+
+/* =========================================================
+   OUR TEAM
+========================================================= */
+
+.team-section {
+    width: 100%;
+}
+
+
+/* Team heading */
+
+.team-heading {
+    text-align: center;
+
+    margin-bottom: 50px;
+}
+
+
+.team-heading p {
+    margin-top: 15px;
+
+    font-size: 16px;
+
+    color: rgba(225, 235, 255, 0.55);
+}
+
+
+/* =========================================================
+   TEAM GRID
+========================================================= */
+
+.team-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   TEAM CARD
+========================================================= */
+
+.team-card {
+    padding: 25px 18px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7, 31, 72, 0.8),
+            rgba(3, 18, 45, 0.7)
+        );
+
+    border: 1px solid
+        rgba(0, 135, 255, 0.2);
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* ALL FIVE CARDS ARE IDENTICAL */
+
+.team-card:hover {
+    transform: translateY(-7px);
+
+    border-color:
+        rgba(25, 176, 255, 0.5);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 110, 255, 0.12);
+}
+
+
+/* =========================================================
+   MEMBER PHOTO
+========================================================= */
+
+.member-photo {
+    width: 105px;
+    height: 105px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #168fff,
+            #063d91 70%,
+            #03265d
+        );
+
+    border: 2px solid
+        rgba(31, 180, 255, 0.35);
+
+    box-shadow:
+        0 0 25px
+        rgba(0, 135, 255, 0.18);
+}
+
+
+/* Placeholder initials */
+
+.member-photo span {
+    font-size: 23px;
+
+    font-weight: 700;
+
+    color: #ffffff;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   MEMBER INFORMATION
+========================================================= */
+
+.member-info h3 {
+    font-size: 17px;
+
+    margin-bottom: 7px;
+
+    color: #ffffff;
+}
+
+
+.member-role {
+    display: block;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    color: #18aaff;
+
+    margin-bottom: 13px;
+}
+
+
+.member-info p {
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    color: rgba(225, 235, 255, 0.55);
+}
+
+
+/* =========================================================
+   ABOUT US RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+
+    .team-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .about-section {
+        padding: 90px 5%;
+    }
+
+
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+
+
+    .feature-card {
+        min-height: auto;
+    }
+
+
+    .team-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .about-section {
+        padding: 70px 20px;
+    }
+
+
+    .about-heading {
+        margin-bottom: 50px;
+    }
+
+
+    .about-heading h2,
+    .team-heading h2 {
+        font-size: 34px;
+    }
+
+
+    .about-text {
+        padding: 25px;
+    }
+
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .team-card {
+        padding: 30px 20px;
+    }
+}
+
+
+
+/* =========================================================
+   CURRENT WEATHER SECTION
+========================================================= */
+
+.current-weather-section {
+    min-height: 100vh;
+    padding: 120px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(0, 130, 255, 0.12),
+            transparent 50%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(1, 10, 30, 0.4),
+            rgba(1, 15, 45, 0.95)
+        );
+
+    scroll-margin-top: 120px;
+}
+
+
+.current-weather-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.weather-heading {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 45px;
+}
+
+
+.weather-heading h2 {
+    font-size: clamp(38px, 4vw, 55px);
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: #ffffff;
+}
+
+
+.weather-heading h2 span {
+    color: #159eff;
+
+    text-shadow:
+        0 0 18px rgba(21, 158, 255, 0.3);
+}
+
+
+.weather-heading p {
+    margin-top: 18px;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color: rgba(225, 235, 255, 0.62);
+}
+
+
+/* =========================================================
+   LOCATION SEARCH
+========================================================= */
+
+/* =========================================================
+   LOCATION SEARCH — FIXED ALIGNMENT
+========================================================= */
+
+.location-search {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto 35px;
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) auto auto;
+
+    gap: 12px;
+
+    align-items: center;
+}
+
+
+/* Search input container */
+
+.location-input-wrapper {
+    position: relative;
+
+    width: 100%;
+
+    min-width: 0;
+}
+
+
+/* Search icon */
+
+.search-icon {
+    position: absolute;
+
+    left: 18px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 21px;
+
+    color: #18aaff;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+
+/* Search input */
+
+.location-input-wrapper input {
+    display: block;
+
+    width: 100%;
+    height: 52px;
+
+    box-sizing: border-box;
+
+    padding: 0 20px 0 50px;
+
+    border-radius: 14px;
+
+    border: 1px solid
+        rgba(0, 145, 255, 0.25);
+
+    outline: none;
+
+    background:
+        rgba(5, 27, 65, 0.65);
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.location-input-wrapper input::placeholder {
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+.location-input-wrapper input:focus {
+    border-color:
+        rgba(24, 170, 255, 0.7);
+
+    box-shadow:
+        0 0 20px
+        rgba(0, 130, 255, 0.12);
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.weather-search-btn,
+.location-btn {
+    height: 52px;
+
+    box-sizing: border-box;
+
+    padding: 0 22px;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+/* Search */
+
+.weather-search-btn {
+    min-width: 105px;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #159eff,
+            #0766d9
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 110, 255, 0.2);
+}
+
+
+.weather-search-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 110, 255, 0.3);
+}
+
+
+/* My Location */
+
+.location-btn {
+    min-width: 160px;
+
+    background:
+        rgba(7, 35, 78, 0.8);
+
+    border: 1px solid
+        rgba(24, 170, 255, 0.3);
+
+    color: #ffffff;
+}
+
+
+.location-btn:hover {
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(24, 170, 255, 0.7);
+}
+
+/* =========================================================
+   MAIN WEATHER CARD
+========================================================= */
+
+.main-weather-card {
+    padding: 35px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7, 32, 73, 0.82),
+            rgba(2, 16, 43, 0.75)
+        );
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.22);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.weather-location {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 30px;
+}
+
+
+.location-pin {
+    font-size: 25px;
+}
+
+
+.weather-location h3 {
+    font-size: 21px;
+
+    color: #ffffff;
+}
+
+
+.weather-location p {
+    margin-top: 4px;
+
+    font-size: 12px;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+/* =========================================================
+   MAIN WEATHER
+========================================================= */
+
+.weather-main {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    padding: 20px 0 40px;
+}
+
+.weather-main #weatherIcon {
+    position: static;
+    flex: 0 0 auto;
+    font-size: 90px;
+
+    line-height: 1;
+
+    filter:
+        drop-shadow(
+            0 0 20px
+            rgba(100, 190, 255, 0.2)
+        );
+}
+
+
+.temperature {
+    display: flex;
+
+    align-items: flex-start;
+
+    color: #ffffff;
+}
+
+
+#temperatureValue {
+    font-size: clamp(75px, 9vw, 110px);
+
+    line-height: 0.9;
+
+    font-weight: 700;
+
+    letter-spacing: -4px;
+}
+
+
+.temperature-unit {
+    font-size: 25px;
+
+    margin-top: 8px;
+
+    color: #18aaff;
+}
+
+
+.weather-condition {
+    padding-left: 25px;
+
+    border-left:
+        1px solid
+        rgba(255, 255, 255, 0.1);
+}
+
+
+.weather-condition h3 {
+    font-size: 24px;
+
+    color: #ffffff;
+
+    margin-bottom: 10px;
+}
+
+
+.weather-condition p {
+    font-size: 14px;
+
+    color:
+        rgba(225, 235, 255, 0.55);
+}
+
+
+.weather-condition strong {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   WEATHER DETAILS
+========================================================= */
+
+.weather-details {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+.weather-detail-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 20px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(4, 25, 59, 0.65);
+
+    border: 1px solid
+        rgba(0, 130, 255, 0.14);
+}
+
+
+.detail-icon {
+    font-size: 28px;
+}
+
+
+.weather-detail-card span {
+    display: block;
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+
+    color:
+        rgba(225, 235, 255, 0.5);
+}
+
+
+.weather-detail-card strong {
+    display: block;
+
+    font-size: 16px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   SUNRISE / SUNSET
+========================================================= */
+
+.sun-times {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 80px;
+
+    margin-top: 25px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+}
+
+
+.sun-time {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.sun-icon {
+    font-size: 28px;
+}
+
+
+.sun-time span:not(.sun-icon) {
+    display: block;
+
+    font-size: 12px;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+.sun-time strong {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 15px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .location-search {
+        grid-template-columns: 1fr 1fr;
+
+        max-width: 700px;
+    }
+    .weather-search-status {
+    grid-column: 1 / -1;
+    min-height: 20px;
+    margin: -2px 0 0;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.45;
+    color: rgba(225, 235, 255, 0.72);
+}
+
+.weather-search-status.is-error {
+    color: #ff9a9a;
+}
+
+    .location-input-wrapper {
+        grid-column: 1 / -1;
+    }
+
+    .weather-search-btn,
+    .location-btn {
+        width: 100%;
+    }
+
+    .weather-details {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .location-search {
+        grid-template-columns: 1fr;
+
+        width: 100%;
+    }
+
+    .location-input-wrapper {
+        grid-column: auto;
+    }
+
+    .weather-search-btn,
+    .location-btn {
+        width: 100%;
+    }
+    .current-weather-section {
+    padding: 150px 20px 70px;
+    scroll-margin-top: 170px;
+}
+
+.main-weather-card {
+    padding: 24px 18px;
+}
+
+.weather-main {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 12px 0 30px;
+}
+
+.weather-condition {
+    flex-basis: 100%;
+    padding: 18px 0 0;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.weather-details {
+    grid-template-columns: 1fr;
+}
+
+.sun-times {
+    justify-content: space-between;
+    gap: 20px;
+}
+
+}
+
+
+/* =========================================================
+   FORECAST SECTION
+========================================================= */
+
+.forecast-section {
+    min-height: 100vh;
+
+    padding: 120px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(0, 130, 255, 0.10),
+            transparent 50%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(1, 10, 30, 0.5),
+            rgba(1, 15, 45, 0.95)
+        );
+
+    scroll-margin-top: 120px;
+}
+
+
+.forecast-container {
+    width: 100%;
+    max-width: 1250px;
+
+    margin: auto;
+}
+
+
+/* =========================================================
+   FORECAST HEADING
+========================================================= */
+
+.forecast-heading {
+    text-align: center;
+
+    max-width: 750px;
+
+    margin: 0 auto 35px;
+}
+
+
+.forecast-heading h2 {
+    font-size: clamp(38px, 4vw, 55px);
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: #ffffff;
+}
+
+
+.forecast-heading h2 span {
+    color: #159eff;
+
+    text-shadow:
+        0 0 18px rgba(21, 158, 255, 0.3);
+}
+
+
+.forecast-heading p {
+    margin-top: 18px;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color:
+        rgba(225, 235, 255, 0.62);
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.forecast-location {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: fit-content;
+
+    margin: 0 auto 30px;
+
+    padding: 12px 20px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(5, 28, 65, 0.55);
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.18);
+
+    backdrop-filter: blur(10px);
+}
+
+
+.forecast-location-icon {
+    font-size: 24px;
+}
+
+
+.forecast-location span {
+    display: block;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+.forecast-location h3 {
+    margin-top: 3px;
+
+    font-size: 15px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   FORECAST MAIN CARD
+========================================================= */
+
+.forecast-card {
+    padding: 28px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7, 32, 73, 0.82),
+            rgba(2, 16, 43, 0.75)
+        );
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.22);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.18);
+}
+
+
+/* Card heading */
+
+.forecast-card-heading {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+
+.forecast-card-heading h3 {
+    font-size: 20px;
+
+    color: #ffffff;
+}
+
+
+.forecast-card-heading p {
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+.forecast-status {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #18aaff;
+}
+/* =========================================================
+   7-DAY FORECAST GRID
+========================================================= */
+/* =========================================================
+   7 DAY FORECAST GRID
+========================================================= */
+
+.forecast-grid {
+    display: grid;
+
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+/* =========================================================
+   FORECAST DAY CARD
+========================================================= */
+
+.forecast-day {
+    min-height: 245px;
+
+    padding: 20px 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    border-radius: 17px;
+
+    background:
+        rgba(4, 25, 59, 0.62);
+
+    border: 1px solid
+        rgba(0, 130, 255, 0.12);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.forecast-day:hover {
+    transform: translateY(-6px);
+
+    border-color:
+        rgba(24, 170, 255, 0.45);
+
+    background:
+        rgba(7, 35, 78, 0.75);
+}
+
+
+/* =========================================================
+   TODAY
+========================================================= */
+
+.forecast-day.today {
+    border-color:
+        rgba(24, 170, 255, 0.55);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8, 46, 94, 0.75),
+            rgba(3, 24, 57, 0.7)
+        );
+
+    box-shadow:
+        0 0 25px
+        rgba(0, 130, 255, 0.08);
+}
+
+
+/* =========================================================
+   DAY NAME
+========================================================= */
+
+.day-name {
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.day-date {
+    margin-top: 5px;
+
+    font-size: 10px;
+
+    color:
+        rgba(225, 235, 255, 0.4);
+}
+
+
+/* =========================================================
+   WEATHER ICON
+========================================================= */
+
+.forecast-icon {
+    font-size: 43px;
+
+    line-height: 1;
+
+    margin: 24px 0 15px;
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(100, 190, 255, 0.18)
+        );
+}
+
+
+/* =========================================================
+   CONDITION
+========================================================= */
+
+.forecast-condition {
+    min-height: 32px;
+
+    font-size: 11px;
+
+    line-height: 1.4;
+
+    color:
+        rgba(225, 235, 255, 0.65);
+}
+
+
+/* =========================================================
+   TEMPERATURE
+========================================================= */
+
+.forecast-temperature {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+
+.forecast-temperature strong {
+    font-size: 21px;
+
+    color: #ffffff;
+}
+
+
+.forecast-temperature span {
+    font-size: 14px;
+
+    color:
+        rgba(225, 235, 255, 0.4);
+}
+
+
+/* =========================================================
+   RAIN PROBABILITY
+========================================================= */
+
+.rain-probability {
+    margin-top: auto;
+
+    padding-top: 13px;
+
+    font-size: 11px;
+
+    color: #18aaff;
+}
+
+
+/* =========================================================
+   TEMPERATURE TREND
+========================================================= */
+
+.temperature-trend {
+    margin-top: 25px;
+
+    padding: 25px 28px;
+
+    border-radius: 22px;
+
+    background:
+        rgba(5, 27, 65, 0.55);
+
+    border: 1px solid
+        rgba(0, 135, 255, 0.16);
+
+    backdrop-filter: blur(12px);
+}
+
+
+.trend-heading {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.trend-heading h3 {
+    font-size: 18px;
+
+    color: #ffffff;
+}
+
+
+.trend-heading p {
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+/* =========================================================
+   TREND LEGEND
+========================================================= */
+
+.trend-legend {
+    display: flex;
+
+    gap: 18px;
+}
+
+
+.trend-legend span {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 11px;
+
+    color:
+        rgba(225, 235, 255, 0.55);
+}
+
+
+.trend-legend i {
+    width: 7px;
+
+    height: 7px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+
+    background: #18aaff;
+
+    box-shadow:
+        0 0 8px
+        rgba(24, 170, 255, 0.6);
+}
+
+
+.trend-legend span:last-child i {
+    background: #56799c;
+}
+
+
+/* =========================================================
+   SIMPLE TREND VISUAL
+========================================================= */
+
+.trend-chart {
+    height: 75px;
+
+    margin-top: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    position: relative;
+
+    padding: 0 10px;
+}
+
+
+.trend-chart::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.05) 0,
+            rgba(255, 255, 255, 0.05) 1px,
+            transparent 1px,
+            transparent 25px
+        );
+}
+
+
+.trend-line {
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    text-align: center;
+}
+
+
+.trend-line span {
+    font-size: 10px;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+.high-line span {
+    color: #18aaff;
+}
+
+
+.low-line span {
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+/* Tablet */
+
+@media (max-width: 1100px) {
+
+    .forecast-grid {
+        grid-template-columns:
+            repeat(4, 1fr);
+    }
+
+}
+
+
+/* Small tablet / large mobile */
+
+@media (max-width: 800px) {
+
+    .forecast-section {
+        padding: 100px 5%;
+    }
+
+
+    .forecast-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 12px;
+    }
+
+
+    .forecast-day {
+        min-height: 230px;
+    }
+
+
+    .trend-heading {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    .forecast-section {
+        padding: 80px 20px;
+    }
+
+
+    .forecast-card {
+        padding: 18px;
+    }
+
+
+    .forecast-card-heading {
+        align-items: flex-start;
+    }
+
+
+    .forecast-status {
+        display: none;
+    }
+
+
+    .forecast-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .forecast-day {
+        min-height: 200px;
+    }
+
+
+    .temperature-trend {
+        padding: 20px;
+    }
+
+}
+/* =========================================================
+   WEATHER ALERTS SECTION
+========================================================= */
+
+.alerts-section {
+    min-height: 100vh;
+
+    padding: 120px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            rgba(0, 130, 255, 0.10),
+            transparent 52%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(1, 10, 30, 0.5),
+            rgba(1, 15, 45, 0.96)
+        );
+
+    scroll-margin-top: 120px;
+}
+
+
+.alerts-container {
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: auto;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.alerts-heading {
+    max-width: 760px;
+
+    margin: 0 auto 35px;
+
+    text-align: center;
+}
+
+
+.alerts-heading h2 {
+    font-size: clamp(38px, 4vw, 55px);
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: #ffffff;
+}
+
+
+.alerts-heading h2 span {
+    color: #159eff;
+
+    text-shadow:
+        0 0 18px
+        rgba(21, 158, 255, 0.3);
+}
+
+
+.alerts-heading p {
+    margin-top: 18px;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color:
+        rgba(225, 235, 255, 0.62);
+}
+.alerts-source-note {
+    margin-top: 10px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: rgba(225, 235, 255, 0.42);
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.alerts-location {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: fit-content;
+
+    margin: 0 auto 30px;
+
+    padding: 12px 20px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(5, 28, 65, 0.55);
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.18);
+
+    backdrop-filter: blur(10px);
+}
+
+
+.alerts-location-icon {
+    font-size: 24px;
+}
+
+
+.alerts-location span {
+    display: block;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+.alerts-location h3 {
+    margin-top: 3px;
+
+    font-size: 15px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   ACTIVE ALERT CARD
+========================================================= */
+
+.active-alert-card {
+    padding: 28px 30px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(80, 54, 12, 0.32),
+            rgba(7, 32, 73, 0.82)
+        );
+
+    border: 1px solid
+        rgba(255, 190, 50, 0.28);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.16);
+
+    backdrop-filter: blur(18px);
+}
+.active-alert-card.is-clear {
+    border-color: rgba(85, 217, 154, 0.25);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22, 90, 63, 0.25),
+            rgba(7, 32, 73, 0.82)
+        );
+}
+
+.active-alert-card.is-low-risk {
+    border-color: rgba(127, 207, 255, 0.30);
+}
+
+.active-alert-card.is-moderate-risk {
+    border-color: rgba(255, 191, 63, 0.35);
+}
+
+.active-alert-card.is-high-risk {
+    border-color: rgba(255, 116, 116, 0.45);
+}
+
+.active-alert-card.is-unavailable {
+    border-color: rgba(225, 235, 255, 0.18);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(55, 65, 85, 0.30),
+            rgba(7, 32, 73, 0.82)
+        );
+}
+
+
+/* Top */
+
+.active-alert-top {
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+}
+
+
+.alert-icon-large {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255, 190, 50, 0.10);
+
+    border: 1px solid
+        rgba(255, 190, 50, 0.20);
+
+    font-size: 28px;
+}
+
+
+.active-alert-title {
+    flex: 1;
+}
+
+
+.alert-status {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+
+    color: #ffbf3f;
+}
+
+
+.active-alert-title h3 {
+    font-size: 23px;
+
+    color: #ffffff;
+}
+
+
+.alert-severity {
+    padding: 8px 13px;
+
+    border-radius: 8px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #ffbf3f;
+
+    background:
+        rgba(255, 190, 50, 0.08);
+
+    border: 1px solid
+        rgba(255, 190, 50, 0.20);
+}
+
+
+/* Alert content */
+
+.active-alert-content {
+    margin-top: 23px;
+
+    padding-top: 23px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+}
+
+
+.active-alert-content > p {
+    max-width: 850px;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    color:
+        rgba(225, 235, 255, 0.65);
+}
+
+
+/* =========================================================
+   ALERT META
+========================================================= */
+
+.alert-meta {
+    display: flex;
+
+    gap: 50px;
+
+    margin-top: 22px;
+}
+
+
+.alert-meta-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.alert-meta-item > span {
+    font-size: 19px;
+}
+
+
+.alert-meta-item small {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+
+    color:
+        rgba(225, 235, 255, 0.38);
+}
+
+
+.alert-meta-item strong {
+    display: block;
+
+    font-size: 12px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   ALERT CATEGORIES
+========================================================= */
+
+.alert-categories {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 14px;
+
+    margin-top: 20px;
+}
+.alert-categories-loading {
+    grid-column: 1 / -1;
+
+    padding: 28px 20px;
+
+    text-align: center;
+
+    border: 1px solid rgba(0, 130, 255, 0.14);
+
+    border-radius: 18px;
+
+    background: rgba(5, 27, 65, 0.45);
+
+    color: rgba(225, 235, 255, 0.62);
+
+    font-size: 14px;
+}
+
+
+.alert-category-card {
+    min-height: 125px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    position: relative;
+
+    border-radius: 18px;
+
+    background:
+        rgba(5, 27, 65, 0.60);
+
+    border: 1px solid
+        rgba(0, 130, 255, 0.14);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.alert-category-card:hover {
+    transform: translateY(-5px);
+
+    border-color:
+        rgba(24, 170, 255, 0.4);
+
+    background:
+        rgba(7, 35, 78, 0.75);
+}
+
+
+.category-icon {
+    font-size: 31px;
+
+    flex-shrink: 0;
+}
+
+
+.category-info {
+    min-width: 0;
+}
+
+
+.category-info > span {
+    display: block;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+
+    color:
+        rgba(225, 235, 255, 0.38);
+}
+
+
+.category-info h3 {
+    margin-top: 5px;
+
+    font-size: 15px;
+
+    color: #ffffff;
+}
+
+
+.category-info p {
+    margin-top: 3px;
+
+    font-size: 10px;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+/* Status */
+
+.category-status {
+    position: absolute;
+
+    top: 13px;
+
+    right: 13px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.category-status.moderate {
+    color: #ffbf3f;
+}
+
+
+.category-status.safe {
+    color: #55d99a;
+}
+.category-status.severity-safe {
+    color: #55d99a;
+}
+
+.category-status.severity-low-risk {
+    color: #7fcfff;
+}
+
+.category-status.severity-moderate-risk {
+    color: #ffbf3f;
+}
+
+.category-status.severity-high-risk {
+    color: #ff7474;
+}
+
+.category-status.severity-unavailable {
+    color: rgba(225, 235, 255, 0.55);
+}
+
+
+/* =========================================================
+   SAFETY INFORMATION
+========================================================= */
+
+.safety-information {
+    margin-top: 22px;
+
+    padding: 25px 28px;
+
+    border-radius: 21px;
+
+    background:
+        rgba(5, 27, 65, 0.55);
+
+    border: 1px solid
+        rgba(0, 135, 255, 0.14);
+
+    backdrop-filter: blur(12px);
+}
+
+
+.safety-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.safety-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(24, 170, 255, 0.08);
+
+    font-size: 22px;
+}
+
+
+.safety-heading h3 {
+    font-size: 18px;
+
+    color: #ffffff;
+}
+
+
+.safety-heading p {
+    margin-top: 4px;
+
+    font-size: 11px;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+/* Safety tips */
+
+.safety-tips {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+    margin-top: 22px;
+}
+
+
+.safety-tip {
+    padding: 15px;
+
+    display: flex;
+
+    gap: 10px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(2, 17, 42, 0.45);
+}
+
+
+.safety-tip > span {
+    font-size: 9px;
+
+    font-weight: 700;
+
+    color: #18aaff;
+}
+
+
+.safety-tip p {
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    color:
+        rgba(225, 235, 255, 0.55);
+}
+
+
+/* =========================================================
+   UPDATED STATUS
+========================================================= */
+
+.alerts-updated {
+    margin-top: 18px;
+
+    text-align: center;
+
+    font-size: 10px;
+
+    color:
+        rgba(225, 235, 255, 0.35);
+}
+
+
+.alerts-updated span {
+    margin-right: 5px;
+
+    color: #55d99a;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .alert-categories {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .safety-tips {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .alerts-section {
+        padding: 100px 5%;
+    }
+
+
+    .active-alert-top {
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+
+    .alert-severity {
+        margin-left: 72px;
+    }
+
+
+    .alert-meta {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    .alert-categories {
+        grid-template-columns: 1fr;
+    }
+
+
+    .safety-tips {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .alerts-section {
+        padding: 80px 20px;
+    }
+
+
+    .active-alert-card {
+        padding: 22px 18px;
+    }
+
+
+    .active-alert-title h3 {
+        font-size: 19px;
+    }
+
+
+    .alert-severity {
+        margin-left: 0;
+    }
+
+
+    .safety-information {
+        padding: 20px;
+    }
+
+}
+
+
+
+/* =========================================================
+   SATELLITE & WEATHER MAPS
+========================================================= */
+
+.satellite-section {
+
+    min-height: 100vh;
+
+    padding: 120px 7%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            rgba(0, 130, 255, 0.11),
+            transparent 52%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(1, 10, 30, 0.5),
+            rgba(1, 15, 45, 0.97)
+        );
+
+    scroll-margin-top: 120px;
+}
+
+
+.satellite-container {
+
+    width: 100%;
+
+    max-width: 1250px;
+
+    margin: auto;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.satellite-heading {
+
+    max-width: 760px;
+
+    margin: 0 auto 35px;
+
+    text-align: center;
+}
+
+
+.satellite-heading h2 {
+
+    font-size: clamp(38px, 4vw, 55px);
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: #ffffff;
+}
+
+
+.satellite-heading h2 span {
+
+    color: #159eff;
+
+    text-shadow:
+        0 0 18px
+        rgba(21, 158, 255, 0.3);
+}
+
+
+.satellite-heading p {
+
+    margin-top: 18px;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color:
+        rgba(225, 235, 255, 0.62);
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.satellite-location {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: fit-content;
+
+    margin: 0 auto 30px;
+
+    padding: 12px 20px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(5, 28, 65, 0.55);
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.18);
+
+    backdrop-filter: blur(10px);
+}
+
+
+.satellite-location-icon {
+
+    font-size: 24px;
+}
+
+
+.satellite-location span {
+
+    display: block;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+.satellite-location h3 {
+
+    margin-top: 3px;
+
+    font-size: 15px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   WEATHER MAP CARD
+========================================================= */
+
+.weather-map-card {
+
+    padding: 25px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7, 32, 73, 0.82),
+            rgba(2, 16, 43, 0.78)
+        );
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.22);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.20);
+}
+
+
+/* =========================================================
+   MAP HEADER
+========================================================= */
+
+.map-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+
+.map-live-indicator {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-bottom: 5px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color: #55d99a;
+}
+
+
+.map-live-indicator span {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #55d99a;
+
+    box-shadow:
+        0 0 8px
+        rgba(85, 217, 154, 0.7);
+
+    animation:
+        livePulse 1.8s infinite;
+}
+
+
+@keyframes livePulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.35;
+    }
+
+}
+
+
+.map-title h3 {
+
+    font-size: 21px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MAP CONTROLS
+========================================================= */
+
+.map-controls {
+
+    display: flex;
+
+    gap: 7px;
+}
+
+
+.map-control-btn {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    border: 1px solid
+        rgba(24, 170, 255, 0.22);
+
+    background:
+        rgba(4, 25, 59, 0.75);
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.map-control-btn:hover {
+
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(24, 170, 255, 0.6);
+
+    background:
+        rgba(7, 40, 85, 0.85);
+}
+
+
+.map-control-btn.reset-map {
+
+    font-size: 17px;
+
+    margin-left: 5px;
+}
+
+
+/* =========================================================
+   WEATHER MAP
+========================================================= */
+
+.weather-map {
+
+    height: 480px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background:
+
+        radial-gradient(
+            ellipse at 30% 40%,
+            rgba(0, 120, 100, 0.30),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 70% 65%,
+            rgba(0, 90, 160, 0.30),
+            transparent 40%
+        ),
+
+        linear-gradient(
+            135deg,
+            #061a36,
+            #082c4e,
+            #061a38
+        );
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.15);
+
+    transition:
+        transform 0.4s ease;
+}
+
+
+/* =========================================================
+   MAP GRID
+========================================================= */
+
+.map-grid {
+
+    position: absolute;
+
+    inset: -50%;
+
+    opacity: 0.18;
+
+    background-image:
+
+        linear-gradient(
+            rgba(70, 170, 210, 0.35) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(70, 170, 210, 0.35) 1px,
+            transparent 1px
+        );
+
+    background-size: 80px 80px;
+
+    transform:
+        rotate(-8deg);
+}
+
+
+/* =========================================================
+   CLOUDS
+========================================================= */
+
+.map-cloud {
+
+    position: absolute;
+
+    font-size: 80px;
+
+    opacity: 0.15;
+
+    filter:
+        blur(1px);
+
+    animation:
+        cloudMove 18s linear infinite;
+}
+
+
+.cloud-one {
+
+    top: 15%;
+
+    left: 12%;
+}
+
+
+.cloud-two {
+
+    top: 48%;
+
+    left: 60%;
+
+    font-size: 110px;
+
+    animation-duration: 25s;
+}
+
+
+.cloud-three {
+
+    top: 70%;
+
+    left: 30%;
+
+    font-size: 65px;
+
+    animation-duration: 21s;
+}
+
+
+@keyframes cloudMove {
+
+    0% {
+        transform:
+            translateX(-25px);
+    }
+
+    50% {
+        transform:
+            translateX(35px);
+    }
+
+    100% {
+        transform:
+            translateX(-25px);
+    }
+
+}
+
+
+/* =========================================================
+   RAIN AREAS
+========================================================= */
+
+.rain-area {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter:
+        blur(25px);
+
+    opacity: 0.35;
+}
+
+
+.rain-one {
+
+    width: 300px;
+
+    height: 180px;
+
+    top: 20%;
+
+    left: 42%;
+
+    background:
+        rgba(20, 145, 255, 0.45);
+
+    transform:
+        rotate(-20deg);
+}
+
+
+.rain-two {
+
+    width: 220px;
+
+    height: 140px;
+
+    bottom: 15%;
+
+    right: 8%;
+
+    background:
+        rgba(0, 180, 255, 0.32);
+
+    transform:
+        rotate(25deg);
+}
+
+
+/* =========================================================
+   USER LOCATION MARKER
+========================================================= */
+
+.user-map-marker {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    z-index: 5;
+}
+
+
+.marker-dot {
+
+    width: 45px;
+
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(21, 158, 255, 0.18);
+
+    border: 1px solid
+        rgba(70, 190, 255, 0.7);
+
+    backdrop-filter: blur(8px);
+
+    font-size: 23px;
+
+    box-shadow:
+        0 0 25px
+        rgba(21, 158, 255, 0.35);
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.marker-pulse {
+
+    position: absolute;
+
+    width: 70px;
+
+    height: 70px;
+
+    border-radius: 50%;
+
+    border: 1px solid
+        rgba(24, 170, 255, 0.4);
+
+    animation:
+        markerPulse 2s infinite;
+}
+
+
+@keyframes markerPulse {
+
+    0% {
+        transform: scale(0.7);
+
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.6);
+
+        opacity: 0;
+    }
+
+}
+
+
+.user-map-marker > span {
+
+    margin-top: 7px;
+
+    padding: 4px 8px;
+
+    border-radius: 5px;
+
+    background:
+        rgba(2, 15, 38, 0.8);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MAP LABELS
+========================================================= */
+
+.map-label {
+
+    position: absolute;
+
+    padding: 7px 10px;
+
+    border-radius: 7px;
+
+    background:
+        rgba(2, 16, 40, 0.65);
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(5px);
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(225, 235, 255, 0.5);
+}
+
+
+.label-one {
+
+    top: 18%;
+
+    left: 8%;
+}
+
+
+.label-two {
+
+    bottom: 22%;
+
+    right: 13%;
+}
+
+
+/* =========================================================
+   COMPASS
+========================================================= */
+
+.map-compass {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 20px;
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        rgba(2, 16, 40, 0.65);
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.08);
+
+    font-size: 14px;
+
+    color: #ffffff;
+}
+
+
+.map-compass span {
+
+    font-size: 8px;
+
+    color: #18aaff;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MAP INFO
+========================================================= */
+
+.map-info {
+
+    position: absolute;
+
+    bottom: 12px;
+
+    left: 15px;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(225, 235, 255, 0.28);
+}
+
+
+/* =========================================================
+   MAP LAYERS
+========================================================= */
+
+.map-layers {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 18px;
+
+    flex-wrap: wrap;
+}
+
+
+.layers-title {
+
+    margin-right: 5px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color:
+        rgba(225, 235, 255, 0.35);
+}
+
+
+.map-layer {
+
+    padding: 9px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    border-radius: 10px;
+
+    border: 1px solid
+        rgba(24, 170, 255, 0.15);
+
+    background:
+        rgba(4, 25, 59, 0.65);
+
+    color:
+        rgba(225, 235, 255, 0.55);
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition:
+        all 0.25s ease;
+}
+
+
+.map-layer:hover {
+
+    border-color:
+        rgba(24, 170, 255, 0.45);
+
+    color: #ffffff;
+}
+
+
+.map-layer.active {
+
+    border-color:
+        rgba(24, 170, 255, 0.55);
+
+    background:
+        rgba(12, 71, 125, 0.45);
+
+    color: #ffffff;
+
+    box-shadow:
+        0 0 15px
+        rgba(0, 130, 255, 0.08);
+}
+
+
+.map-layer span {
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   INFORMATION CARDS
+========================================================= */
+
+.map-information {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 14px;
+
+    margin-top: 20px;
+}
+
+
+.map-info-card {
+
+    min-height: 125px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 13px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(5, 27, 65, 0.60);
+
+    border: 1px solid
+        rgba(0, 130, 255, 0.14);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.map-info-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(24, 170, 255, 0.4);
+}
+
+
+.map-info-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+    background:
+        rgba(24, 170, 255, 0.08);
+
+    font-size: 21px;
+}
+
+
+.map-info-card span {
+
+    display: block;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+
+    color:
+        rgba(225, 235, 255, 0.35);
+}
+
+
+.map-info-card h3 {
+
+    margin-top: 5px;
+
+    font-size: 15px;
+
+    color: #ffffff;
+}
+
+
+.map-info-card p {
+
+    margin-top: 5px;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+}
+
+
+/* =========================================================
+   MAP STATUS
+========================================================= */
+
+.map-status {
+
+    margin-top: 16px;
+
+    text-align: center;
+
+    font-size: 9px;
+
+    color:
+        rgba(225, 235, 255, 0.3);
+}
+
+
+.map-status span {
+
+    color: #55d99a;
+
+    font-size: 8px;
+
+    margin-right: 5px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .map-information {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .satellite-section {
+
+        padding: 100px 5%;
+    }
+
+
+    .weather-map {
+
+        height: 400px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .satellite-section {
+
+        padding: 80px 20px;
+    }
+
+
+    .weather-map-card {
+
+        padding: 18px;
+    }
+
+
+    .map-header {
+
+        align-items: flex-start;
+    }
+
+
+    .map-controls {
+
+        gap: 5px;
+    }
+
+
+    .map-control-btn {
+
+        width: 34px;
+
+        height: 34px;
+    }
+
+
+    .weather-map {
+    overflow: hidden;
+    position: relative;
+}
+
+        /* The actual content inside the map */
+        .map-zoom-content {
+            position: absolute;
+            inset: 0;
+
+            transform-origin: center center;
+
+            transition: transform 0.35s ease;
+
+            pointer-events: none;
+        }
+
+        /* Keep map controls/labels visually inside the map */
+        .map-zoom-content > * {
+            max-width: none;
+        }
+
+
+    .map-layers {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .layers-title {
+
+        margin-bottom: 2px;
+    }
+
+
+    .map-layer {
+
+        justify-content: center;
+    }
+
+
+    .map-information {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .map-info-card {
+
+        min-height: 105px;
+    }
+
+}
+
+
+
+/* =========================================================
+   CONTACT SECTION
+========================================================= */
+
+.contact-section {
+
+    min-height: 100vh;
+
+    padding: 120px 7%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(0, 130, 255, 0.10),
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(0, 100, 255, 0.08),
+            transparent 40%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(1, 10, 30, 0.55),
+            rgba(1, 15, 45, 0.98)
+        );
+
+    scroll-margin-top: 120px;
+}
+
+
+.contact-container {
+
+    width: 100%;
+
+    max-width: 1150px;
+
+    margin: auto;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.contact-heading {
+
+    max-width: 750px;
+
+    margin: 0 auto 45px;
+
+    text-align: center;
+}
+
+
+.contact-heading h2 {
+
+    font-size: clamp(38px, 4vw, 55px);
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: #ffffff;
+}
+
+
+.contact-heading h2 span {
+
+    color: #159eff;
+
+    text-shadow:
+        0 0 18px
+        rgba(21, 158, 255, 0.30);
+}
+
+
+.contact-heading p {
+
+    margin-top: 18px;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color:
+        rgba(225, 235, 255, 0.62);
+}
+
+
+/* =========================================================
+   CONTACT CONTENT
+========================================================= */
+
+.contact-content {
+
+    display: grid;
+
+    grid-template-columns:
+        0.85fr 1.15fr;
+
+    gap: 25px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   LEFT CONTACT INFORMATION
+========================================================= */
+
+.contact-info {
+
+    padding: 30px;
+
+    border-radius: 23px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7, 32, 73, 0.78),
+            rgba(2, 17, 43, 0.72)
+        );
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.18);
+
+    backdrop-filter: blur(18px);
+}
+
+
+.contact-info-heading > span {
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #18aaff;
+}
+
+
+.contact-info-heading h3 {
+
+    margin-top: 8px;
+
+    font-size: 28px;
+
+    color: #ffffff;
+}
+
+
+.contact-info-heading p {
+
+    margin-top: 12px;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+    color:
+        rgba(225, 235, 255, 0.50);
+}
+
+
+/* =========================================================
+   CONTACT INFO CARDS
+========================================================= */
+
+.contact-info-card {
+
+    margin-top: 17px;
+
+    padding: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(2, 18, 45, 0.48);
+
+    border: 1px solid
+        rgba(0, 130, 255, 0.10);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.contact-info-card:hover {
+
+    transform:
+        translateX(4px);
+
+    border-color:
+        rgba(24, 170, 255, 0.35);
+
+    background:
+        rgba(5, 31, 68, 0.65);
+}
+
+
+.contact-card-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        rgba(24, 170, 255, 0.09);
+
+    font-size: 19px;
+}
+
+
+.contact-info-card span {
+
+    display: block;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color:
+        rgba(225, 235, 255, 0.35);
+}
+
+
+.contact-info-card h4 {
+
+    margin-top: 4px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #ffffff;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   PROJECT CARD
+========================================================= */
+
+.contact-project-card {
+
+    margin-top: 20px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 130, 255, 0.10),
+            rgba(0, 80, 180, 0.05)
+        );
+
+    border:
+        1px solid
+        rgba(24, 170, 255, 0.15);
+}
+
+
+.project-icon {
+
+    width: 45px;
+
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(24, 170, 255, 0.10);
+
+    font-size: 23px;
+}
+
+
+.contact-project-card span {
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color: #18aaff;
+}
+
+
+.contact-project-card p {
+
+    margin-top: 4px;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    color:
+        rgba(225, 235, 255, 0.55);
+}
+
+
+/* =========================================================
+   FORM CARD
+========================================================= */
+
+.contact-form-card {
+
+    padding: 30px;
+
+    border-radius: 23px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7, 32, 73, 0.80),
+            rgba(2, 17, 43, 0.76)
+        );
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.18);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.16);
+}
+
+
+/* =========================================================
+   FORM HEADING
+========================================================= */
+
+.form-heading h3 {
+
+    font-size: 23px;
+
+    color: #ffffff;
+}
+
+
+.form-heading p {
+
+    margin-top: 6px;
+
+    font-size: 11px;
+
+    color:
+        rgba(225, 235, 255, 0.42);
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.form-group {
+
+    margin-top: 18px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    color:
+        rgba(225, 235, 255, 0.65);
+}
+
+
+.form-group input,
+.form-group textarea {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border-radius: 10px;
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.16);
+
+    outline: none;
+
+    background:
+        rgba(2, 17, 42, 0.62);
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+
+    color:
+        rgba(225, 235, 255, 0.27);
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+
+    border-color:
+        rgba(24, 170, 255, 0.55);
+
+    background:
+        rgba(3, 22, 51, 0.75);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(24, 170, 255, 0.06);
+}
+
+
+.form-group textarea {
+
+    resize: vertical;
+
+    min-height: 115px;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.contact-submit-btn {
+
+    width: 100%;
+
+    margin-top: 21px;
+
+    padding: 14px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #078ce8,
+            #159eff
+        );
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 130, 255, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.contact-submit-btn:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 130, 255, 0.28);
+}
+
+
+.contact-submit-btn:active {
+
+    transform:
+        translateY(0);
+}
+
+
+.submit-arrow {
+
+    font-size: 17px;
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.contact-submit-btn:hover .submit-arrow {
+
+    transform:
+        translateX(4px);
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+========================================================= */
+
+.contact-success {
+
+    display: none;
+
+    margin-top: 14px;
+
+    padding: 11px;
+
+    border-radius: 9px;
+
+    text-align: center;
+
+    background:
+        rgba(85, 217, 154, 0.08);
+
+    border: 1px solid
+        rgba(85, 217, 154, 0.18);
+
+    color: #55d99a;
+
+    font-size: 10px;
+}
+
+
+.contact-success.show {
+
+    display: block;
+
+    animation:
+        successAppear 0.35s ease;
+}
+
+
+@keyframes successAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-5px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.contact-bottom {
+
+    margin-top: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 18px;
+}
+
+
+.contact-bottom-line {
+
+    width: 80px;
+
+    height: 1px;
+
+    background:
+        rgba(24, 170, 255, 0.16);
+}
+
+
+.contact-bottom p {
+
+    font-size: 10px;
+
+    color:
+        rgba(225, 235, 255, 0.32);
+}
+
+
+.contact-bottom strong {
+
+    color:
+        rgba(24, 170, 255, 0.65);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .contact-content {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .contact-section {
+
+        padding: 90px 20px;
+
+    }
+
+
+    .contact-info,
+    .contact-form-card {
+
+        padding: 22px;
+
+    }
+
+
+    .contact-info-heading h3 {
+
+        font-size: 24px;
+
+    }
+
+
+    .contact-bottom-line {
+
+        width: 40px;
+
+    }
+
+}
+
+
+@media (max-width: 400px) {
+
+    .contact-bottom-line {
+
+        display: none;
+
+    }
+
+}
+
+/* =========================================================
+   PERSONA ("FOR YOU") TABS + INSIGHT PANEL
+   Added to wire up #personaTabs / #personaPanel to live data.
+========================================================= */
+
+.persona-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+
+    max-width: 1000px;
+    margin: 0 auto 35px;
+}
+
+.persona-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 12px 18px;
+
+    border-radius: 999px;
+
+    border: 1px solid rgba(0, 145, 255, 0.25);
+
+    background: rgba(5, 27, 65, 0.55);
+
+    color: rgba(225, 235, 255, 0.75);
+
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.2s ease;
+}
+
+.persona-tab:hover {
+    border-color: rgba(24, 170, 255, 0.55);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.persona-tab.active {
+    background: linear-gradient(135deg, #159eff, #0a6fd1);
+    border-color: transparent;
+    color: #ffffff;
+    box-shadow: 0 0 22px rgba(21, 158, 255, 0.35);
+}
+
+.persona-tab-icon {
+    font-size: 16px;
+}
+
+.persona-panel {
+    max-width: 1000px;
+    margin: 0 auto;
+
+    padding: 32px;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(0, 145, 255, 0.2);
+
+    background: rgba(4, 20, 50, 0.55);
+
+    backdrop-filter: blur(16px);
+}
+
+.insights-loading {
+    text-align: center;
+
+    padding: 20px 10px;
+
+    color: rgba(225, 235, 255, 0.55);
+
+    font-size: 14.5px;
+}
+
+.insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 16px;
+
+    margin-bottom: 22px;
+}
+
+.insight-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    padding: 18px;
+
+    border-radius: 17px;
+
+    border: 1px solid rgba(0, 145, 255, 0.18);
+
+    background: rgba(7, 33, 74, 0.55);
+
+    transition:
+        border-color 0.25s ease,
+        transform 0.2s ease;
+}
+
+.insight-card:hover {
+    border-color: rgba(24, 170, 255, 0.45);
+    transform: translateY(-2px);
+}
+
+.insight-icon {
+    font-size: 26px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.insight-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.insight-label {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: rgba(225, 235, 255, 0.5);
+}
+
+.insight-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.insight-sub {
+    font-size: 12.5px;
+    color: rgba(225, 235, 255, 0.55);
+}
+
+.insight-tip {
+    padding: 14px 18px;
+
+    border-radius: 14px;
+
+    background: rgba(21, 158, 255, 0.1);
+
+    border: 1px solid rgba(21, 158, 255, 0.25);
+
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(225, 235, 255, 0.85);
+}
+
+.insight-data-note {
+    padding: 12px 18px;
+
+    border-radius: 14px;
+
+    margin-bottom: 14px;
+
+    background: rgba(255, 180, 40, 0.08);
+
+    border: 1px solid rgba(255, 180, 40, 0.25);
+
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: rgba(255, 220, 170, 0.85);
+}
+
+.insight-packing h4,
+.destinations-widget h4,
+.events-forecast h4 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.insight-packing ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.insight-packing li {
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    background: rgba(7, 33, 74, 0.5);
+
+    border: 1px solid rgba(0, 145, 255, 0.15);
+
+    font-size: 14px;
+    color: rgba(225, 235, 255, 0.8);
+}
+
+
+/* =========================================================
+   SAVED DESTINATIONS WIDGET (Travelers persona)
+========================================================= */
+
+.destinations-widget {
+    margin-top: 28px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid rgba(0, 145, 255, 0.15);
+}
+
+.destination-add-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.destination-add-row input {
+    flex: 1;
+    min-width: 0;
+
+    height: 46px;
+
+    padding: 0 16px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(0, 145, 255, 0.25);
+
+    background: rgba(5, 27, 65, 0.65);
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+.destination-add-row input::placeholder {
+    color: rgba(225, 235, 255, 0.4);
+}
+
+.destination-add-row button {
+    height: 46px;
+    padding: 0 22px;
+
+    border-radius: 12px;
+    border: none;
+
+    background: linear-gradient(135deg, #159eff, #0a6fd1);
+
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.destination-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.destination-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 16px;
+
+    border-radius: 14px;
+
+    background: rgba(7, 33, 74, 0.5);
+
+    border: 1px solid rgba(0, 145, 255, 0.15);
+}
+
+.destination-icon {
+    font-size: 22px;
+}
+
+.destination-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.destination-name {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.destination-meta {
+    font-size: 12.5px;
+    color: rgba(225, 235, 255, 0.55);
+}
+
+.destination-error {
+    flex: 1;
+    font-size: 13px;
+    color: rgba(225, 235, 255, 0.5);
+}
+
+.destination-alert {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(255, 90, 90, 0.15);
+    border: 1px solid rgba(255, 90, 90, 0.35);
+    color: #ffb4b4;
+    white-space: nowrap;
+}
+
+.destination-clear {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(60, 220, 130, 0.1);
+    border: 1px solid rgba(60, 220, 130, 0.3);
+    color: #9df0c2;
+    white-space: nowrap;
+}
+
+.destination-remove {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+
+    color: rgba(225, 235, 255, 0.6);
+    font-size: 13px;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.destination-remove:hover {
+    background: rgba(255, 90, 90, 0.15);
+    border-color: rgba(255, 90, 90, 0.4);
+    color: #ffb4b4;
+}
+
+
+/* =========================================================
+   EXTENDED RAIN OUTLOOK (Event Planners persona)
+========================================================= */
+
+.events-days-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+}
+
+.events-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    padding: 14px 8px;
+
+    border-radius: 14px;
+
+    background: rgba(7, 33, 74, 0.5);
+
+    border: 1px solid rgba(0, 145, 255, 0.15);
+}
+
+.events-day span {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: rgba(225, 235, 255, 0.55);
+    text-transform: uppercase;
+}
+
+.events-day strong {
+    font-size: 17px;
+    color: #159eff;
+}
+
+.events-day small {
+    font-size: 11.5px;
+    color: rgba(225, 235, 255, 0.5);
+}
+
+
+/* =========================================================
+   PERSONA PANEL — RESPONSIVE
+========================================================= */
+
+@media (max-width: 640px) {
+
+    .persona-panel {
+        padding: 22px 16px;
+    }
+
+    .insight-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .destination-add-row {
+        flex-direction: column;
+    }
+
+    .destination-add-row button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .insight-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================================
+   FOR YOU SECTION
+========================================================= */
+
+.for-you-section {
+
+    position: relative;
+
+    padding: 110px 0;
+
+}
+
+
+.section-container {
+
+    width: min(
+        1200px,
+        calc(100% - 40px)
+    );
+
+    margin: 0 auto;
+
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.for-you-section .section-header {
+
+    text-align: center;
+
+    margin-bottom: 38px;
+
+}
+
+
+.section-kicker {
+
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(80, 185, 255, 0.8);
+
+}
+
+
+.for-you-section .section-header h2 {
+
+    margin: 0;
+
+    font-size: clamp(
+        32px,
+        4vw,
+        48px
+    );
+
+    font-weight: 700;
+
+    color:
+        #ffffff;
+
+}
+
+
+.for-you-section .section-header h2 span {
+
+    color:
+        #36b7ff;
+
+}
+
+
+.for-you-section .section-header p {
+
+    max-width: 600px;
+
+    margin: 12px auto 0;
+
+    color:
+        rgba(225, 235, 255, 0.5);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================================
+   PROFILE TABS
+========================================================= */
+
+.for-you-tabs {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(8, minmax(0, 1fr));
+
+    gap: 8px;
+
+    padding: 7px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(3, 20, 43, 0.7);
+
+    border: 1px solid
+        rgba(0, 145, 255, 0.12);
+
+}
+
+
+/* =========================================================
+   PROFILE TAB
+========================================================= */
+
+.for-you-tab {
+
+    position: relative;
+
+    min-width: 0;
+
+    min-height: 82px;
+
+    padding: 11px 7px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    border: 1px solid transparent;
+
+    border-radius: 15px;
+
+    background:
+        rgba(8, 35, 67, 0.42);
+
+    color:
+        rgba(225, 235, 255, 0.55);
+
+    cursor: pointer;
+
+    transition:
+        all 0.25s ease;
+
+}
+
+
+.for-you-tab:hover {
+
+    background:
+        rgba(10, 48, 88, 0.7);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.for-you-tab.active {
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(10, 80, 140, 0.8),
+            rgba(5, 43, 82, 0.9)
+        );
+
+    border-color:
+        rgba(35, 178, 255, 0.55);
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 8px 28px
+        rgba(0, 120, 255, 0.1);
+
+}
+
+
+/* Active indicator */
+
+.for-you-tab.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 28%;
+
+    right: 28%;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background:
+        #28b5ff;
+
+    box-shadow:
+        0 0 12px
+        rgba(40, 181, 255, 0.7);
+
+}
+
+
+/* =========================================================
+   TAB ICON
+========================================================= */
+
+.for-you-tab-icon {
+
+    font-size: 25px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   TAB TEXT
+========================================================= */
+
+.for-you-tab-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 2px;
+
+}
+
+
+.for-you-tab-text strong {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.for-you-tab-text small {
+
+    font-size: 8px;
+
+    white-space: nowrap;
+
+    color:
+        rgba(225, 235, 255, 0.35);
+
+}
+
+
+.for-you-tab.active
+.for-you-tab-text small {
+
+    color:
+        rgba(255, 255, 255, 0.5);
+
+}
+
+
+/* =========================================================
+   MAIN PANEL
+========================================================= */
+
+.for-you-panel {
+
+    margin-top: 18px;
+
+    padding: 28px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(6, 39, 76, 0.8),
+            rgba(3, 20, 45, 0.88)
+        );
+
+    border: 1px solid
+        rgba(25, 169, 255, 0.2);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.12);
+
+}
+
+
+/* =========================================================
+   PANEL HEADER
+========================================================= */
+
+.for-you-panel-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.for-you-panel-kicker {
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+
+    color:
+        rgba(50, 180, 255, 0.75);
+
+}
+
+
+.for-you-panel-header h3 {
+
+    margin-top: 7px;
+
+    font-size: 23px;
+
+    color:
+        #ffffff;
+
+}
+
+
+.for-you-panel-header p {
+
+    margin-top: 6px;
+
+    max-width: 600px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color:
+        rgba(225, 235, 255, 0.45);
+
+}
+
+
+/* =========================================================
+   LIVE INDICATOR
+========================================================= */
+
+.for-you-live {
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 8px 11px;
+
+    border-radius: 20px;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(120, 220, 255, 0.75);
+
+    background:
+        rgba(0, 130, 255, 0.08);
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.15);
+
+}
+
+
+.live-dot {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background:
+        #32c7ff;
+
+    box-shadow:
+        0 0 9px
+        rgba(50, 199, 255, 0.8);
+
+}
+
+
+/* =========================================================
+   METRICS
+========================================================= */
+
+.for-you-metrics {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+}
+
+
+/* =========================================================
+   METRIC CARD
+========================================================= */
+
+.for-you-metric {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    min-height: 88px;
+
+    padding: 16px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(1, 19, 41, 0.48);
+
+    border: 1px solid
+        rgba(0, 140, 255, 0.1);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.for-you-metric:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(20, 165, 255, 0.25);
+
+}
+
+
+/* =========================================================
+   METRIC ICON
+========================================================= */
+
+.for-you-metric-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        rgba(0, 130, 255, 0.08);
+
+    font-size: 20px;
+
+}
+
+
+/* =========================================================
+   METRIC CONTENT
+========================================================= */
+
+.for-you-metric-content {
+
+    min-width: 0;
+
+}
+
+
+.for-you-metric-content small {
+
+    display: block;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(225, 235, 255, 0.35);
+
+}
+
+
+.for-you-metric-content strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 18px;
+
+    color:
+        #ffffff;
+
+}
+
+
+.for-you-metric-content span {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 9px;
+
+    color:
+        rgba(225, 235, 255, 0.4);
+
+}
+
+
+/* =========================================================
+   RECOMMENDATION
+========================================================= */
+
+.for-you-recommendation {
+
+    margin-top: 14px;
+
+    padding: 15px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(0, 125, 255, 0.06);
+
+    border: 1px solid
+        rgba(20, 165, 255, 0.1);
+
+}
+
+
+.recommendation-icon {
+
+    width: 36px;
+
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        rgba(0, 145, 255, 0.09);
+
+}
+
+
+.for-you-recommendation span {
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    color:
+        rgba(50, 180, 255, 0.65);
+
+}
+
+
+.for-you-recommendation p {
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    color:
+        rgba(225, 235, 255, 0.65);
+
+}
+
+
+/* =========================================================
+   FOR YOU RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .for-you-tabs {
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .for-you-section {
+
+        padding: 80px 0;
+
+    }
+
+
+    .for-you-tabs {
+
+        display: flex;
+
+        overflow-x: auto;
+
+        scrollbar-width: none;
+
+    }
+
+
+    .for-you-tabs::-webkit-scrollbar {
+
+        display: none;
+
+    }
+
+
+    .for-you-tab {
+
+        flex:
+            0 0 100px;
+
+    }
+
+
+    .for-you-panel {
+
+        padding: 20px;
+
+    }
+
+
+    .for-you-panel-header {
+
+        flex-direction: column;
+
+    }
+
+
+    .for-you-metrics {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .section-container {
+
+        width:
+            calc(100% - 28px);
+
+    }
+
+
+    .for-you-metrics {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
