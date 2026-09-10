@@ -1011,14 +1011,17 @@ async function fetchBundle(
       fetchMarine(lat, lon),
     ]);
 
-  if (
-    forecastResult.status !==
-    "fulfilled"
-  ) {
-    throw new Error(
-      "Forecast data unavailable right now"
+  if (forecastResult.status !== "fulfilled") {
+    console.error(
+        "Open-Meteo forecast error:",
+        forecastResult.reason
     );
-  }
+
+    throw new Error(
+        forecastResult.reason?.message ||
+        "Forecast data unavailable right now"
+    );
+}
 
   const bundle = {
     forecast:
