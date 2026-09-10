@@ -67,7 +67,7 @@ const CONTACT_FILE = path.join(
  * Small in-memory cache
  * ------------------------------------------------------------ */
 
-const CACHE_TTL_MS = 300 * 60 * 1000;
+const CACHE_TTL_MS = 5 * 60 * 1000;
 
 // Stores completed weather responses.
 const cache = new Map();
