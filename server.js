@@ -214,13 +214,12 @@ async function fetchForecast(lat, lon) {
     console.log("Open-Meteo URL:", url);
 
     return fetchJson(url).catch((error) => {
-        console.error(
-            "Open-Meteo forecast error:",
-            error.message
-        );
-
-        throw error;
-    });
+    console.error("OPEN_METEO_FORECAST_ERROR");
+    console.error("URL:", url);
+    console.error("MESSAGE:", error.message);
+    console.error("STACK:", error.stack);
+    throw error;
+});
 }
 /* ------------------------------------------------------------
  * Air quality
