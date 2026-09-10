@@ -1,0 +1,13 @@
+{
+  "name": "mausam-plus-backend",
+  "version": "1.1.0",
+  "description": "Zero-dependency backend for the MAUSAM+ weather frontend. Wraps Open-Meteo (forecast, air quality, marine) into the JSON shape the frontend expects, plus full persona-oriented insights for all 8 personas (health, fitness, beach, travel, family, agriculture, commute, events), derived weather alerts, and a saved-destinations lookup endpoint.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
