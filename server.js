@@ -213,13 +213,38 @@ async function fetchForecast(lat, lon) {
 
     console.log("Open-Meteo URL:", url);
 
-    return fetchJson(url).catch((error) => {
-    console.error("OPEN_METEO_FORECAST_ERROR");
-    console.error("URL:", url);
-    console.error("MESSAGE:", error.message);
-    console.error("STACK:", error.stack);
-    throw error;
-});
+    let lastError;
+
+    for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+            return await fetchJson(url);
+        } catch (error) {
+            lastError = error;
+
+            console.error(
+                `Open-Meteo forecast attempt ${attempt} failed:`,
+                error.message
+            );
+
+            if (!error.message.includes("429")) {
+                throw error;
+            }
+
+            if (attempt < 3) {
+                const delay = attempt * 5000;
+
+                console.log(
+                    `Open-Meteo rate limited. Retrying in ${delay / 1000}s...`
+                );
+
+                await new Promise(resolve =>
+                    setTimeout(resolve, delay)
+                );
+            }
+        }
+    }
+
+    throw lastError;
 }
 /* ------------------------------------------------------------
  * Air quality
