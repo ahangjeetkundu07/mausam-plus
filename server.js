@@ -67,9 +67,15 @@ const CONTACT_FILE = path.join(
  * Small in-memory cache
  * ------------------------------------------------------------ */
 
-const CACHE_TTL_MS = 5 * 60 * 1000;
+const CACHE_TTL_MS = 10 * 60 * 1000;
 
+// Stores completed weather responses.
 const cache = new Map();
+
+// Stores requests currently being fetched.
+// This prevents multiple identical requests from
+// hitting Open-Meteo at the same time.
+const inFlight = new Map();
 
 function cacheGet(key) {
   const hit = cache.get(key);
@@ -986,68 +992,80 @@ function buildAlerts(
  * Weather bundle
  * ------------------------------------------------------------ */
 
-async function fetchBundle(
-  lat,
-  lon
-) {
+async function fetchBundle(lat, lon) {
   const cacheKey =
     `w:${lat.toFixed(2)},${lon.toFixed(2)}`;
 
-  const cached =
-    cacheGet(cacheKey);
+  // 1. Return cached data when available.
+  const cached = cacheGet(cacheKey);
 
   if (cached) {
     return cached;
   }
 
-  const [
-    forecastResult,
-    airResult,
-    marineResult,
-  ] =
-    await Promise.allSettled([
+  // 2. If the exact same location is already being
+  //    fetched, wait for that existing request instead
+  //    of creating another Open-Meteo request.
+  if (inFlight.has(cacheKey)) {
+    return inFlight.get(cacheKey);
+  }
+
+  // 3. Create one shared request for this location.
+  const requestPromise = (async () => {
+    const [
+      forecastResult,
+      airResult,
+      marineResult,
+    ] = await Promise.allSettled([
       fetchForecast(lat, lon),
       fetchAirQuality(lat, lon),
       fetchMarine(lat, lon),
     ]);
 
-  if (forecastResult.status !== "fulfilled") {
-    console.error(
+    if (forecastResult.status !== "fulfilled") {
+      console.error(
         "Open-Meteo forecast error:",
         forecastResult.reason
-    );
+      );
 
-    throw new Error(
+      throw new Error(
         forecastResult.reason?.message ||
         "Forecast data unavailable right now"
-    );
+      );
+    }
+
+    const bundle = {
+      forecast:
+        forecastResult.value,
+
+      air:
+        airResult.status === "fulfilled"
+          ? airResult.value
+          : null,
+
+      marine:
+        marineResult.status === "fulfilled"
+          ? marineResult.value
+          : null,
+    };
+
+    // 4. Save only successful results.
+    cacheSet(cacheKey, bundle);
+
+    return bundle;
+  })();
+
+  // 5. Remember the active request.
+  inFlight.set(cacheKey, requestPromise);
+
+  try {
+    return await requestPromise;
+  } finally {
+    // 6. Always remove the active request when finished,
+    //    whether successful or failed.
+    inFlight.delete(cacheKey);
+  }
 }
-
-  const bundle = {
-    forecast:
-      forecastResult.value,
-
-    air:
-      airResult.status ===
-      "fulfilled"
-        ? airResult.value
-        : null,
-
-    marine:
-      marineResult.status ===
-      "fulfilled"
-        ? marineResult.value
-        : null,
-  };
-
-  cacheSet(
-    cacheKey,
-    bundle
-  );
-
-  return bundle;
-}
-
 /* ------------------------------------------------------------
  * Build persona insights
  * ------------------------------------------------------------ */
