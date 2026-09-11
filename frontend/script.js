@@ -3682,7 +3682,6 @@ function formatForYouTime(value) {
     });
 }
 function updateBeachPersona(data) {
-
     if (!data) return;
 
     const wave = document.getElementById("for-you-wave");
@@ -3690,6 +3689,15 @@ function updateBeachPersona(data) {
     const condition = document.getElementById("for-you-sea-condition");
     const uv = document.getElementById("for-you-beach-uv");
     const tip = document.getElementById("for-you-beach-tip");
+
+    const waveDirection =
+        document.getElementById("for-you-wave-direction");
+
+    const wavePeriod =
+        document.getElementById("for-you-wave-period");
+
+    const marineDistance =
+        document.getElementById("for-you-marine-distance");
 
     if (wave) {
         wave.textContent =
@@ -3716,6 +3724,29 @@ function updateBeachPersona(data) {
                 ? `${data.uv_index} — ${data.uv_label}`
                 : "No data";
     }
+    if (waveDirection) {
+    waveDirection.textContent =
+        data.wave_direction_deg !== null &&
+        data.wave_direction_deg !== undefined
+            ? `${data.wave_direction_deg}°`
+            : "No data";
+}
+
+if (wavePeriod) {
+    wavePeriod.textContent =
+        data.wave_period_s !== null &&
+        data.wave_period_s !== undefined
+            ? `${data.wave_period_s} s`
+            : "No data";
+}
+
+if (marineDistance) {
+    marineDistance.textContent =
+        data.marine_distance_km !== null &&
+        data.marine_distance_km !== undefined
+            ? `${data.marine_distance_km} km`
+            : "No data";
+}
 
     if (tip) {
         tip.textContent = data.tip || "";
