@@ -3066,63 +3066,67 @@ function updateForYouProfile(profileName) {
             fitness.tip ||
             profile.recommendation;
     }
+// ---------------------------------------------------------
+// BEACH
+// ---------------------------------------------------------
 
-    // ---------------------------------------------------------
-    // BEACH
-    // ---------------------------------------------------------
+else if (profileName === "beach") {
 
-    else if (profileName === "beach") {
+    metrics = [
+        {
+            icon: "🌊",
+            name: "WAVE HEIGHT",
+            value:
+                beach.wave_height_m !== null &&
+                beach.wave_height_m !== undefined
+                    ? `${Number(beach.wave_height_m).toFixed(1)} m`
+                    : "--",
+            label:
+                beach.condition_label ||
+                "Wave conditions"
+        },
+        {
+            icon: "🌡️",
+            name: "SEA TEMP",
+            value:
+                beach.sea_surface_temperature_c !== null &&
+                beach.sea_surface_temperature_c !== undefined
+                    ? `${Math.round(
+                        beach.sea_surface_temperature_c
+                    )}°C`
+                    : "--",
+            label: "Sea surface temperature"
+        },
+        {
+            icon: "🧭",
+            name: "WAVE DIRECTION",
+            value:
+                beach.wave_direction_deg !== null &&
+                beach.wave_direction_deg !== undefined
+                    ? `${Math.round(
+                        beach.wave_direction_deg
+                    )}°`
+                    : "--",
+            label: "Wave direction"
+        },
+        {
+            icon: "⏱️",
+            name: "WAVE PERIOD",
+            value:
+                beach.wave_period_s !== null &&
+                beach.wave_period_s !== undefined
+                    ? `${Number(
+                        beach.wave_period_s
+                    ).toFixed(1)} s`
+                    : "--",
+            label: "Wave interval"
+        }
+    ];
 
-        metrics = [
-            {
-                icon: "🌊",
-                name: "WAVE HEIGHT",
-                value:
-                    beach.wave_height_m !== null &&
-                    beach.wave_height_m !== undefined
-                        ? `${Number(beach.wave_height_m).toFixed(1)} m`
-                        : "--",
-                label:
-                    beach.condition_label ||
-                    "Wave conditions"
-            },
-            {
-                icon: "🌡️",
-                name: "SEA TEMP",
-                value:
-                    beach.sea_surface_temperature_c !== null &&
-                    beach.sea_surface_temperature_c !== undefined
-                        ? `${Math.round(beach.sea_surface_temperature_c)}°C`
-                        : "--",
-                label: "Sea surface temperature"
-            },
-            {
-                icon: "☀️",
-                name: "UV INDEX",
-                value:
-                    beach.uv_index !== null &&
-                    beach.uv_index !== undefined
-                        ? Math.round(beach.uv_index)
-                        : "--",
-                label:
-                    beach.uv_label ||
-                    "UV conditions"
-            },
-            {
-                icon: "🌙",
-                name: "TIDE",
-                value: "Unavailable",
-                label:
-                    beach.tide_note ||
-                    "No live tide data"
-            }
-        ];
-
-        recommendationText =
-            beach.tip ||
-            profile.recommendation;
-    }
-
+    recommendationText =
+        beach.tip ||
+        profile.recommendation;
+}
     // ---------------------------------------------------------
     // TRAVEL
     // ---------------------------------------------------------
