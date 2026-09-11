@@ -274,16 +274,48 @@ async function fetchAirQuality(lat, lon) {
  * ------------------------------------------------------------ */
 
 async function fetchMarine(lat, lon) {
-  try {
-    const url =
-      `${OM_MARINE}?latitude=${lat}&longitude=${lon}` +
-      `&current=wave_height,sea_surface_temperature` +
-      `&timezone=auto`;
+  const points = [
+    [lat, lon],
+    [lat + 0.05, lon],
+    [lat - 0.05, lon],
+    [lat, lon + 0.05],
+    [lat, lon - 0.05],
+    [lat + 0.05, lon + 0.05],
+    [lat + 0.05, lon - 0.05],
+    [lat - 0.05, lon + 0.05],
+    [lat - 0.05, lon - 0.05],
+  ];
 
-    return await fetchJson(url);
-  } catch (error) {
-    return null;
+  for (const [testLat, testLon] of points) {
+    try {
+      const url =
+        `${OM_MARINE}?latitude=${testLat}&longitude=${testLon}` +
+        `&current=wave_height,sea_surface_temperature,wave_direction,wave_period` +
+        `&timezone=auto`;
+
+      const data = await fetchJson(url);
+
+      const current = data?.current;
+
+      if (
+        current &&
+        (
+          current.wave_height !== null &&
+          current.sea_surface_temperature !== null
+        )
+      ) {
+        return {
+          ...data,
+          _marine_latitude: testLat,
+          _marine_longitude: testLon,
+        };
+      }
+    } catch (error) {
+      // Try the next nearby marine point
+    }
   }
+
+  return null;
 }
 
 /* ------------------------------------------------------------
