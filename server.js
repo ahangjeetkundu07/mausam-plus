@@ -273,45 +273,147 @@ async function fetchAirQuality(lat, lon) {
  * Marine
  * ------------------------------------------------------------ */
 
+function offsetCoordinate(lat, lon, distanceKm, bearingDeg) {
+  const R = 6371;
+
+  const bearing = (bearingDeg * Math.PI) / 180;
+  const lat1 = (lat * Math.PI) / 180;
+  const lon1 = (lon * Math.PI) / 180;
+
+  const angularDistance = distanceKm / R;
+
+  const lat2 = Math.asin(
+    Math.sin(lat1) * Math.cos(angularDistance) +
+      Math.cos(lat1) *
+        Math.sin(angularDistance) *
+        Math.cos(bearing)
+  );
+
+  const lon2 =
+    lon1 +
+    Math.atan2(
+      Math.sin(bearing) * Math.sin(angularDistance) * Math.cos(lat1),
+      Math.cos(angularDistance) -
+        Math.sin(lat1) * Math.sin(lat2)
+    );
+
+  return {
+    latitude: (lat2 * 180) / Math.PI,
+    longitude: (((lon2 * 180) / Math.PI + 540) % 360) - 180
+  };
+}
+
+
+function distanceKmBetween(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) ** 2;
+
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+
 async function fetchMarine(lat, lon) {
-  const points = [
-    [lat, lon],
-    [lat + 0.05, lon],
-    [lat - 0.05, lon],
-    [lat, lon + 0.05],
-    [lat, lon - 0.05],
-    [lat + 0.05, lon + 0.05],
-    [lat + 0.05, lon - 0.05],
-    [lat - 0.05, lon + 0.05],
-    [lat - 0.05, lon - 0.05],
+  const searchRadiiKm = [5, 15, 30, 50];
+
+  const bearings = [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
   ];
 
-  for (const [testLat, testLon] of points) {
-    try {
-      const url =
-        `${OM_MARINE}?latitude=${testLat}&longitude=${testLon}` +
-        `&current=wave_height,sea_surface_temperature,wave_direction,wave_period` +
-        `&timezone=auto`;
+  for (const radiusKm of searchRadiiKm) {
 
-      const data = await fetchJson(url);
+    const candidates = bearings.map((bearing) =>
+      offsetCoordinate(
+        lat,
+        lon,
+        radiusKm,
+        bearing
+      )
+    );
 
-      const current = data?.current;
+    const results = await Promise.all(
+      candidates.map(async (point) => {
 
-      if (
-        current &&
-        (
-          current.wave_height !== null &&
-          current.sea_surface_temperature !== null
-        )
-      ) {
-        return {
-          ...data,
-          _marine_latitude: testLat,
-          _marine_longitude: testLon,
-        };
-      }
-    } catch (error) {
-      // Try the next nearby marine point
+        try {
+
+          const url =
+            `${OM_MARINE}?latitude=${point.latitude}` +
+            `&longitude=${point.longitude}` +
+            `&current=wave_height,sea_surface_temperature,wave_direction,wave_period` +
+            `&timezone=auto`;
+
+          const data = await fetchJson(url);
+
+          const current = data?.current;
+
+          if (
+            !current ||
+            (
+              current.wave_height == null &&
+              current.sea_surface_temperature == null
+            )
+          ) {
+            return null;
+          }
+
+          return {
+            data,
+            distanceKm: distanceKmBetween(
+              lat,
+              lon,
+              point.latitude,
+              point.longitude
+            ),
+            latitude: point.latitude,
+            longitude: point.longitude
+          };
+
+        } catch (error) {
+
+          return null;
+
+        }
+
+      })
+    );
+
+    const valid = results
+      .filter(Boolean)
+      .sort(
+        (a, b) =>
+          a.distanceKm - b.distanceKm
+      );
+
+    if (valid.length > 0) {
+
+      const best = valid[0];
+
+      return {
+        ...best.data,
+
+        _marine_distance_km:
+          Number(best.distanceKm.toFixed(1)),
+
+        _marine_latitude:
+          best.latitude,
+
+        _marine_longitude:
+          best.longitude
+      };
     }
   }
 
@@ -1169,6 +1271,15 @@ function buildInsights(
       ?.sea_surface_temperature ??
     null;
 
+  const waveDirection =
+  marine?.current?.wave_direction ?? null;
+
+const wavePeriod =
+  marine?.current?.wave_period ?? null;
+
+const marineDistanceKm =
+  marine?._marine_distance_km ?? null;
+
   const uvNow =
     forecast.current.uv_index ??
     null;
@@ -1318,6 +1429,10 @@ function buildInsights(
       sea_surface_temperature_c:
         seaTemp,
 
+      wave_direction_deg: waveDirection,
+wave_period_s: wavePeriod,
+marine_distance_km: marineDistanceKm,
+      
       available:
         wave !== null ||
         seaTemp !== null,
